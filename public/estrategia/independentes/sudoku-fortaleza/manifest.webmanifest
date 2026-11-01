@@ -1,0 +1,10 @@
+{
+  "name": "Sudoku da Fortaleza | PG Estratégia",
+  "short_name": "Sudoku Fortaleza",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "lang": "pt-BR",
+  "background_color": "#0b1724",
+  "theme_color": "#152938"
+}

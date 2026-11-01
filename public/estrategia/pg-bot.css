@@ -1,0 +1,28 @@
+/* Ajuda local carregada quando solicitada; nunca cobre o tabuleiro em partida. */
+.pg-bot-launch{display:inline-flex;align-items:center;gap:9px}
+.pg-bot-launch img{width:26px;height:30px;object-fit:contain;flex:none}
+.pg-bot-dialog[open]{padding:12px;overflow:auto}
+.pg-bot-panel{width:min(480px,100%);max-height:calc(100dvh - 24px);overflow:auto;margin:auto;background:#15243b;border:1px solid #7796b6;border-radius:19px;padding:22px;box-shadow:0 16px 60px #000b}
+.pg-bot-heading{display:flex;align-items:center;gap:14px}
+.pg-bot-heading img{object-fit:contain;flex:none;width:60px;height:68px}
+.pg-bot-heading h2{font-size:28px;letter-spacing:-.5px}
+.pg-bot-panel p{color:#d0dbea;line-height:1.55}
+.pg-bot-disclosure{font-size:12px;color:#b1c4d8!important;margin:12px 0 20px}
+.pg-bot-topics{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.pg-bot-topics button{flex:1 1 160px;min-height:44px;text-align:left;padding:10px 12px;border-radius:10px;border:1px solid #68849f;background:#213752;color:#f4f7fb;font-weight:650}
+.pg-bot-topics button:hover{background:#315071}
+.pg-bot-topics button[aria-pressed="true"]{background:#31556d;border-color:#e0ffae;box-shadow:inset 3px 0 #d6fa90}
+.pg-bot-question-form{margin:12px 0 15px}
+.pg-bot-question-form label{display:block;font-weight:760;font-size:14px;margin-bottom:7px;color:#f3f9ff}
+.pg-bot-question-form small{display:block;margin-top:7px;color:#cbd6e6;font-size:12px;line-height:1.45}
+.pg-bot-question-row{display:flex;flex-wrap:wrap;gap:8px}
+.pg-bot-question-row input{min-width:0;flex:1 1 175px;min-height:48px;border:1px solid #829fba;border-radius:10px;padding:10px 12px;background:#0c1b2e;color:#fff;font:inherit}
+.pg-bot-question-row button{min-height:48px;flex:0 0 auto;border:1px solid #b6dda0;border-radius:10px;padding:10px 14px;color:#102219;background:#caffb3;font:inherit;font-weight:800;cursor:pointer}
+.pg-bot-question-row input:focus-visible,.pg-bot-question-row button:focus-visible,.pg-bot-topics button:focus-visible{outline:3px solid #deffa9;outline-offset:2px}
+.pg-bot-response{background:#0d1a2d;border:1px solid #506e87;border-radius:12px;padding:13px 15px}
+.pg-bot-answer-topic{font-size:12px;color:#b5eed5;letter-spacing:.04em}
+.pg-bot-answer{min-height:72px;margin:7px 0 0;padding:0;background:transparent;border:none;overflow-wrap:anywhere}
+.pg-bot-dialog .pg-bot-close{min-height:44px;width:100%;margin-top:12px}
+@media(max-width:350px){.pg-bot-panel{padding:14px}.pg-bot-heading h2{font-size:25px}}
+/* The in-arena help control remains reachable alongside the other actions at 320px. */
+@media(max-width:440px){.arena-head{flex-wrap:wrap}.arena-head>span{order:4;flex:1 1 100%;text-align:center}.arena-head #pg-bot-in-arena{min-height:44px}}

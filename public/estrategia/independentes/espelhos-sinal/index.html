@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#132b42">
+<meta name="description" content="Espelhos de Sinal: jogo de estratégia com trajetórias, refletores, dois modos, três dificuldades e controles para celular.">
+<title>Espelhos de Sinal | PG Estratégia</title>
+<link rel="stylesheet" href="./style.css">
+<link rel="manifest" href="./manifest.webmanifest">
+</head>
+<body>
+<a class="skip" href="#main">Pular para o jogo</a>
+<div class="shell">
+<header class="topbar">
+<a href="../" class="brand">PG <strong>ESTRATÉGIA</strong></a>
+<nav aria-label="Navegação entre projetos"><a href="../">Jogos independentes</a><a href="../../">Campanha</a><a href="../../../">PG Arcade</a></nav>
+</header>
+<main id="main">
+<p class="eyebrow">JOGO ORIGINAL · LÓGICA DE REFLEXÃO</p>
+<h1>Espelhos <em>de Sinal</em></h1>
+<p class="intro">O sinal entra pelo topo, reflete nos espelhos e precisa alcançar os receptores na base. Toque nos refletores para alternar entre as orientações <strong>/</strong> e <strong>\</strong>. Cada giro conta.</p>
+<section class="settings" aria-label="Configurar partida">
+<label>Objetivo<select id="mode"><option value="simples">Um feixe · uma rota</option><option value="duplo">Dois feixes · duas rotas</option></select></label>
+<label>Dificuldade<select id="difficulty"><option value="recruta">Recruta · grade 4 × 4</option><option value="tatico">Tático · grade 5 × 5</option><option value="veterano">Veterano · grade 6 × 6</option></select></label>
+<button id="new" type="button">Nova transmissão</button>
+</section>
+<div class="layout">
+<section class="arena" aria-labelledby="arena-title">
+<div class="arena-head"><h2 id="arena-title">Mesa de sinais</h2><span id="phase" data-phase="playing">Em andamento</span></div>
+<div class="metrics">
+<p>Giros<strong id="moves">0/12</strong></p>
+<p>Receptores<strong id="reached">0/1</strong></p>
+<p>Recorde<strong id="record">Nenhum</strong></p>
+</div>
+<p id="emitter-label" class="emitter-label">Entradas no topo</p>
+<div id="emitters" class="terminals" aria-label="Emissores"></div>
+<div class="board-wrap"><div id="board" class="board" role="group" aria-label="Grade de espelhos"></div></div>
+<div id="targets" class="terminals targets" aria-label="Receptores"></div>
+<div class="legend"><span><i class="key beam"></i> Feixe</span><span><i class="key mirror"></i> Espelho giratório</span><span><i class="key decoy"></i> Posição opcional</span></div>
+<p id="status" class="status" role="status" aria-live="polite"></p>
+<div class="controls">
+<button id="undo" type="button">Desfazer</button>
+<button id="hint" type="button">Pedir dica</button>
+<button id="pause" type="button" aria-pressed="false">Pausar</button>
+</div>
+<p id="hint-text" class="hint" role="status" aria-live="polite">Uma dica pode indicar o próximo espelho.</p>
+</section>
+<aside class="help">
+<h2>Como jogar</h2>
+<p>Os pontos de entrada aparecem acima da grade e os receptores ficam abaixo. Um espelho <strong>/</strong> desvia os feixes em um sentido; um <strong>\</strong> reflete no sentido oposto. Os traços brilhantes mostram o caminho atual.</p>
+<p><strong>Um feixe:</strong> direcione uma transmissão. <strong>Dois feixes:</strong> conduza dois sinais simultaneamente, sem que um erro comprometa a rota do outro. A dificuldade altera o tamanho da grade e os espelhos opcionais.</p>
+<p>Use toque, mouse, Tab e Enter. Pausar bloqueia alterações e Desfazer recupera o giro anterior. A partida e o recorde ficam apenas neste navegador.</p>
+<details id="pg-bot"><summary>PG Bot · Ajuda contextual</summary>
+<p>Ajuda local, sem enviar informações a serviços externos.</p>
+<div class="topics"><button type="button" data-help="objetivo">Objetivo</button><button type="button" data-help="controles">Controles</button><button type="button" data-help="situacao">Situação</button></div>
+<p id="bot-answer" role="status" aria-live="polite">Selecione uma pergunta.</p>
+</details>
+</aside>
+</div>
+</main>
+<footer><a href="../">Outros jogos</a><a href="../../">PG Estratégia</a><a href="../../../">PG Arcade</a><small>Gratuito · Sem login · Recordes locais</small></footer>
+</div>
+<script type="module" src="./app.js"></script>
+<!-- PG_BOT_ASK_BRIDGE_START -->
+<script>
+// PG Bot: acessibilidade e perguntas locais para os 27 jogos independentes.
+// Este arquivo é incorporado aos respectivos index.html para funcionar offline.
+(() => {
+  const plain = value => String(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const init = () => {
+    const panel = document.getElementById('pg-bot');
+    if (!panel || panel.querySelector('.pg-bot-ask')) return;
+    // Cada sub-jogo usa nomes de data-* diferentes; os três botões nativos são a fonte de verdade.
+    const topics = [...panel.querySelectorAll('button')];
+    if (topics.length < 2) return;
+    const style = document.createElement('style');
+    style.textContent = '.pg-bot-ask{margin-top:14px;display:grid;gap:8px;min-width:0}.pg-bot-ask label{font-size:13px;font-weight:750;line-height:1.45}.pg-bot-ask-row{display:flex;flex-wrap:wrap;gap:8px}.pg-bot-ask input{flex:1 1 150px;min-width:0;max-width:100%;min-height:44px;padding:10px;border:1px solid #9cc5d5;border-radius:9px;background:#10293b;color:#fff;font:inherit}.pg-bot-ask button{min-height:44px;border-radius:9px;border:1px solid #c0ee96;background:#c0ee96;color:#14291f;padding:9px 13px;font:inherit;font-weight:800;cursor:pointer}.pg-bot-ask :is(input,button):focus-visible{outline:3px solid #dcffac;outline-offset:3px}.pg-bot-ask small{font-size:11px;line-height:1.5;color:#d2e6ef}.pg-bot-ask-status{margin:0;min-height:0;line-height:1.5;font-size:13px;overflow-wrap:anywhere;color:#e1f2fa}';
+    document.head.append(style);
+    const form = document.createElement('form');
+    form.className = 'pg-bot-ask';
+    form.autocomplete = 'off';
+    const label = document.createElement('label');
+    label.htmlFor = 'pg-bot-ask-input';
+    label.textContent = 'Pergunte ao PG Bot sobre este jogo';
+    const row = document.createElement('div');
+    row.className = 'pg-bot-ask-row';
+    const field = document.createElement('input');
+    field.id = 'pg-bot-ask-input';
+    field.type = 'search';
+    field.name = 'pergunta';
+    field.maxLength = 240;
+    field.placeholder = 'Ex.: como vencer?';
+    field.setAttribute('enterkeyhint', 'send');
+    const submit = document.createElement('button');
+    submit.type = 'submit';
+    submit.textContent = 'Perguntar';
+    row.append(field, submit);
+    const description = document.createElement('small');
+    description.textContent = 'Respostas prontas do jogo atual, sem IA conectada e sem envio da pergunta.';
+    const status = document.createElement('p');
+    status.className = 'pg-bot-ask-status';
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    form.append(label,row,description,status);
+    panel.append(form);
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      const question = plain(field.value.trim());
+      if (/offline|sem internet|sem rede|sem conexao|desconectad/.test(question)) {
+        status.textContent = 'O jogo pode funcionar offline depois de carregar os arquivos neste aparelho. Na primeira visita ou sem cache disponível, é necessário acessar a internet.';
+        return;
+      }
+      let wanted = '';
+      if (/situac|status|estado|turno|placar|pontos|pontu|record|progresso|minha partida/.test(question)) wanted = 'status';
+      else if (/dica|estrateg|como venc|ganhar|como ganh|melhor jogad|proximo passo/.test(question)) wanted = 'strategy';
+      else if (/teclado|teclas|controles|comandos|como mover|como tocar|mouse|toque|botao/.test(question)) wanted = 'controls';
+      else if (/objetivo|como jog|regras|comec|iniciar|preciso fazer|qual a meta/.test(question)) wanted = 'objective';
+      const find = pattern => topics.find(button => pattern.test(plain(button.textContent)));
+      const selected = wanted === 'status' ? find(/situac|status/) :
+        wanted === 'strategy' ? (find(/estrateg|dica/) || find(/objetivo/)) :
+        wanted === 'controls' ? find(/control/) :
+        wanted === 'objective' ? (find(/objetivo/) || find(/control/)) : null;
+      if (selected) {
+        status.textContent = '';
+        selected.click();
+      } else {
+        status.textContent = 'Posso orientar sobre objetivo, estratégia, controles, situação e uso offline. Escolha uma opção acima ou escreva outra pergunta.';
+      }
+    });
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
+  else init();
+})();
+</script>
+<!-- PG_BOT_ASK_BRIDGE_END -->
+</body>
+</html>

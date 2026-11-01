@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0a101d" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="description" content="PG Estratégia: 150 desafios de estratégia por turnos, em seis estilos de jogo, com progresso local, controles mobile e conexão com o PG Arcade." />
+  <link rel="canonical" href="https://pabloguilherme1121.github.io/PG-Arcade/estrategia/" />
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./pg-bot.css" />
+  <link rel="icon" href="./icon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <meta property="og:title" content="PG Estratégia | 150 desafios táticos" />
+  <meta property="og:description" content="Seis sistemas de estratégia, 150 missões jogáveis, progresso local e desafios sem anúncios." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://pabloguilherme1121.github.io/PG-Arcade/estrategia/" />
+  <title>PG Estratégia — 150 desafios táticos</title>
+</head>
+<body>
+  <a class="skip" href="#main">Pular para o conteúdo</a>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="identity" href="./" aria-label="Início PG Estratégia"><span class="identity-icon" aria-hidden="true">✣</span><span>PG <b>ESTRATÉGIA</b><small>UM PROJETO PG ARCADE</small></span></a>
+      <nav class="topnav" aria-label="Entre os sites"><a class="topnav-current" href="./" aria-current="page">Estratégia</a><a href="../">PG Arcade <span aria-hidden="true">↗</span></a><a class="portfolio-link" href="https://pabloguilherme1121.github.io/PG-portfolio/">Portfólio</a></nav>
+      <button id="theme-btn" class="smallbtn" type="button" aria-label="Alternar contraste" aria-pressed="false">◐</button>
+    </header>
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy"><div class="eyebrow"><span class="eyebrow-dot"></span> NOVA COLEÇÃO · 6 SISTEMAS DE REGRAS</div>
+          <h1 id="hero-title">Vença com a <em>próxima jogada.</em></h1>
+          <p>Território, economia, defesa, logística e gestão. <strong>150 missões estratégicas</strong> distribuídas em seis modos reais de jogo. Escolha sua estratégia, avance e construa seu histórico.</p>
+          <div class="hero-actions"><a href="#catalogo" class="button primary">Explorar missões <span aria-hidden="true">↗</span></a><button id="surprise" class="button secondary" type="button">Missão surpresa ↗</button><a href="#classicos" class="button secondary">47 jogos do Arcade ↗</a><button id="pg-bot-open" class="button secondary pg-bot-launch" type="button" aria-haspopup="dialog" aria-controls="pg-bot-dialog"><img src="../brand/pg-bot/mascot.webp" alt="" width="26" height="30" loading="lazy" decoding="async" /> Ajuda do PG Bot</button></div>
+          <div class="hero-disclaimer">150 cenários individuais, construídos sobre seis mecânicas compartilhadas. Sem cadastro ou compras.</div>
+        </div>
+        <div class="hero-art" aria-hidden="true"><div class="battle-head">SIMULAÇÃO TÁTICA <span>EST·150</span></div><div class="art-board"><span class="art-cell a1">◇</span><span class="art-cell a2"></span><span class="art-cell a3">♜</span><span class="art-cell a4"></span><span class="art-cell a5">✦</span><span class="art-cell a6"></span><span class="art-cell a7">◉</span><span class="art-cell a8"></span><span class="art-cell a9">✣</span><span class="art-cell a10"></span><span class="art-cell a11"></span><span class="art-cell a12">◈</span><span class="art-cell a13">◇</span><span class="art-cell a14"></span><span class="art-cell a15"></span><span class="art-cell a16">▣</span></div><div class="art-foot"><span>OPERAÇÃO EM CURSO</span><span>06 / 25</span></div></div>
+      </section>
+      <section class="stats" aria-label="Estatísticas do catálogo"><div><span class="stat-num">150</span><span>MISSÕES</span></div><div><span class="stat-num">06</span><span>MECÂNICAS</span></div><div><span id="win-count" class="stat-num">00</span><span>CONCLUÍDAS</span></div><div><span id="star-count" class="stat-num">00</span><span>FAVORITAS</span></div></section>
+      <section id="catalogo" class="catalog-section" aria-labelledby="catalog-title">
+        <div class="section-intro"><div><div class="kicker">ESCOLHA SEU PRÓXIMO DESAFIO</div><h2 id="catalog-title">O arsenal estratégico</h2><p>Filtre por especialidade e continue de onde parou.</p></div><span class="catalog-counter" id="result-count">150 missões</span></div>
+        <div class="filters"><label class="searchwrap"><span aria-hidden="true">⌕</span><span class="sr-only">Pesquisar missões</span><input id="search" type="search" placeholder="Buscar território, economia, missão..." autocomplete="off" /></label><select id="sort" aria-label="Ordenar missões"><option value="index">Ordem da coleção</option><option value="level">Mais difíceis primeiro</option><option value="won">Não concluídas primeiro</option></select></div>
+        <div class="category-tabs" id="family-tabs" role="group" aria-label="Filtrar por mecânica"></div>
+        <div class="mission-grid" id="mission-list"></div><p id="empty" class="empty" hidden>Nenhuma missão encontrada. Ajuste a busca ou o filtro.</p>
+        <div class="pager"><button class="button secondary" id="more" type="button">Carregar mais missões</button></div>
+      </section>
+      <section class="classics" id="jogos-originais" aria-labelledby="originais-title">
+        <div class="section-intro"><div><div class="kicker">EVOLUÇÃO DO CATÁLOGO · TÍTULOS DISTINTOS</div><h2 id="originais-title">Novos jogos estratégicos originais</h2><p>36 jogos independentes com motores próprios, dificuldades e partidas completas. Não são variações das 150 missões.</p></div><a class="text-link" href="./independentes/">Abrir laboratório de jogos ↗</a></div>
+        <div class="classics-grid" aria-label="Jogos originais independentes">
+          <a class="classic-item" href="./independentes/#frota-oculta">◈ Frota Oculta · estratégia naval</a>
+          <a class="classic-item" href="./independentes/#cartas-de-cerco">♜ Cartas de Cerco · combate com baralho</a>
+          <a class="classic-item" href="./independentes/#hex-conexao">⬡ Hex Conexão · ligações táticas</a>
+          <a class="classic-item" href="./independentes/#patrulha-tatica">♞ Patrulha Tática · combate e resgate</a>
+          <a class="classic-item" href="./independentes/#damas-taticas">♔ Damas Táticas · captura e promoção</a>
+          <a class="classic-item" href="./independentes/#muralha-das-torres">♜ Muralha das Torres · defesa tática</a>
+          <a class="classic-item" href="./independentes/#fronteira-orbital">✧ Fronteira Orbital · exploração 4X</a>
+          <a class="classic-item" href="./independentes/#refugio-do-inverno">❄ Refúgio do Inverno · sobrevivência</a>
+          <a class="classic-item" href="./independentes/mercado-de-rotas/">◎ Mercado de Rotas · comércio e logística</a>
+          <a class="classic-item" href="./independentes/conselho-de-reinos/">✥ Conselho dos Reinos · negociação e votos</a>
+          <a class="classic-item" href="./independentes/reversi-tatico/">● Reversi Tático · captura por linhas e IA</a>
+          <a class="classic-item" href="./independentes/cifras-reais/">◆ Cifras Reais · dedução de códigos</a>
+          <a class="classic-item" href="./independentes/comando-de-drones/">◉ Comando de Drones · programação de ordens táticas</a>
+          <a class="classic-item" href="./independentes/oficina-automatos/">⚙ Oficina de Autômatos · produção industrial</a>
+          <a class="classic-item" href="./independentes/#mercado-de-sombras">◉ Mercado de Sombras · leilões táticos</a>
+          <a class="classic-item" href="./independentes/controle-trafego/">◉ Controle de Tráfego · semáforos e resgates</a>
+          <a class="classic-item" href="./independentes/malha-energia/">◉ Malha de Energia · paridade e circuitos</a>
+          <a class="classic-item" href="./independentes/pontes-arquipelago/">◉ Pontes do Arquipélago · redes e redundância</a>
+          <a class="classic-item" href="./independentes/torre-logistica/">◉ Torre Logística · discos e transferências</a>
+          <a class="classic-item" href="./independentes/guardioes-biomas/">✿ Guardiões dos Biomas · previsão climática e conservação</a>
+          <a class="classic-item" href="./independentes/rede-frequencias/">⌁ Rede de Frequências · canais e interferências</a>
+          <a class="classic-item" href="./independentes/central-resgates/">R Central de Resgates · turnos de atendimento e prazos</a>
+          <a class="classic-item" href="./independentes/linha-contencao/">♨ Linha de Contenção · combate tático a incêndios</a>
+          <a class="classic-item" href="./independentes/espelhos-sinal/">◇ Espelhos de Sinal · reflexão e rotas de feixes</a>
+          <a class="classic-item" href="./independentes/armazem-tatico/">▣ Armazém Tático · quebra-cabeça de cargas e planejamento</a>
+          <a class="classic-item" href="./independentes/nonograma-tatico/">▦ Nonograma Tático · dedução de padrões e sequências</a>
+          <a class="classic-item" href="./independentes/moinhos-pedra/">◈ Moinhos de Pedra · alinhamento, captura e voo estratégico</a>
+          <a class="classic-item" href="./independentes/satelites-orbitais/">◈ Satélites Orbitais · janelas de contato e energia</a>
+          <a class="classic-item" href="./independentes/travessia-vale/">◈ Travessia do Vale · logística, capacidade e segurança</a>
+          <a class="classic-item" href="./independentes/cofre-codigos/">⌘ Cofre de Códigos · combinação secreta e dedução por tentativas</a>
+          <a class="classic-item" href="./independentes/relogios-mare/">◉ Relógios da Maré · mostradores acoplados e sincronização</a>
+          <a class="classic-item" href="./independentes/sudoku-fortaleza/">▦ Sudoku da Fortaleza · números e restrições diagonais</a>
+          <a class="classic-item" href="./independentes/labirinto-sombras/">Labirinto das Sombras · infiltração por turnos e patrulhas</a>
+          <a class="classic-item" href="./independentes/portos-em-turnos/">Portos em Turnos · dois cais simultâneos e carga com restrição de calado</a>
+          <a class="classic-item" href="./independentes/territorios-de-pedra/">Territórios de Pedra · captura de grupos e domínio territorial</a>
+          <a class="classic-item" href="./independentes/conves-modular/">Convés Modular · empacotamento e lastro de carga</a>
+        </div>
+      </section>
+      <section id="classicos" class="classics" aria-labelledby="classics-title">
+        <div class="section-intro"><div><div class="kicker">JOGOS ORIGINAIS · UMA SÓ BIBLIOTECA</div>
+          <h2 id="classics-title">47 jogos clássicos de estratégia</h2>
+          <p>Escolha e jogue aqui. Os motores, favoritos e recordes continuam no PG Arcade, sem cópias ou perdas de progresso.</p>
+        </div><a class="text-link" href="../">Ver catálogo completo ↗</a></div>
+        <div class="classic-shortcuts"><button type="button" class="button secondary" id="classic-continue" hidden>Continuar último jogo</button></div>
+        <div class="classic-filters" role="group" aria-label="Filtrar jogos de estratégia">
+          <label>Buscar jogo<input id="classic-search" type="search" aria-label="Buscar jogos de estratégia" placeholder="Xadrez, dominó, rotas..." autocomplete="off"></label>
+          <label>Tipo de jogo<select id="classic-filter" aria-label="Filtrar tipo de estratégia">
+            <option value="all">Todos os estilos</option>
+            <option value="favorites">Meus favoritos no Arcade</option>
+            <option value="tabuleiro">Tabuleiro e turnos</option>
+            <option value="gestao">Gestão e recursos</option>
+            <option value="logica">Lógica e rotas</option>
+            <option value="acao">Ação e cooperação</option>
+          </select></label>
+          <button type="button" class="button secondary" id="classic-clear">Limpar filtros</button>
+          <span id="classic-count" role="status" aria-live="polite">47 jogos encontrados</span>
+        </div>
+        <div id="classics-list" class="classics-grid"></div>
+        <p id="classic-empty" class="empty" hidden>Nenhum jogo encontrado. Limpe os filtros para mostrar todos os jogos.</p>
+      </section>
+    </main>
+    <footer class="footer"><span>PG ESTRATÉGIA <small>· uma coleção do PG Arcade</small></span><div><a href="../">PG Arcade</a><a href="https://pabloguilherme1121.github.io/PG-portfolio/">PG Portfólio</a></div><small>Progresso salvo somente neste navegador; sem conta e sem sincronização entre dispositivos.</small></footer>
+  </div>
+  <dialog id="arena" aria-label="Jogo de estratégia"><div class="arena-frame"><div class="arena-head"><button type="button" class="back" id="exit">← Catálogo</button><button type="button" class="back" id="pg-bot-in-arena" aria-haspopup="dialog" aria-controls="pg-bot-dialog">PG Bot · Dica</button><span id="arena-category">TÁTICA</span><button type="button" id="reset" class="back">↻ Reiniciar</button></div><div class="arena-intro"><div><small id="arena-id">EST-001</small><h2 id="arena-title">Missão</h2><p id="arena-guide"></p></div><div class="arena-turns">TURNO <strong id="arena-turn">0 / 12</strong></div></div><div class="arena-progress"><span id="arena-metric">Progresso</span><span id="arena-progress-text">0 / 1</span></div><div class="progress-track"><div id="arena-progress-bar"></div></div><div id="arena-stats" class="arena-stats"></div><div id="defense-visual" class="defense-visual" aria-label="Panorama das três pistas de defesa" hidden></div><div id="battlefield" class="battlefield" aria-label="Tabuleiro da missão"></div><div id="arena-actions" class="arena-actions"></div><p role="status" aria-live="polite" id="arena-message" class="arena-message"></p><div class="arena-footer"><button type="button" id="undo" class="button secondary">↶ Desfazer</button><button type="button" id="favorite" class="button secondary">☆ Favoritar</button><button type="button" id="next" class="button primary" hidden>Próximo desafio →</button></div></div></dialog>
+  <dialog id="pg-bot-dialog" class="pg-bot-dialog" aria-labelledby="pg-bot-title">
+    <div class="pg-bot-panel">
+      <div class="pg-bot-heading">
+        <img src="../brand/pg-bot/mascot.webp" alt="" width="60" height="68" loading="lazy" decoding="async" />
+        <div><p class="eyebrow">AJUDA LOCAL</p><h2 id="pg-bot-title">PG Bot</h2></div>
+      </div>
+      <p>Escolha um assunto para receber orientações sobre os jogos.</p>
+      <p class="pg-bot-disclosure">Respostas prontas. Este mascote não é uma IA nem um atendimento humano. Nenhum dado é enviado.</p>
+      <div class="pg-bot-topics" role="group" aria-label="Assuntos da ajuda">
+        <button type="button" data-help-topic="como-jogar">Como jogar</button>
+        <button type="button" data-help-topic="dica-missao">Dica da missão</button>
+        <button type="button" data-help-topic="progresso">Salvar progresso</button>
+        <button type="button" data-help-topic="offline">Jogar offline</button>
+        <button type="button" data-help-topic="reiniciar">Desfazer ou reiniciar</button>
+        <button type="button" data-help-topic="acessibilidade">Teclado e contraste</button>
+        <button type="button" data-help-topic="estado-missao">Situação atual</button>
+      </div>
+      <form id="pg-bot-question-form" class="pg-bot-question-form" autocomplete="off">
+        <label for="pg-bot-question">Pergunte ao PG Bot</label>
+        <div class="pg-bot-question-row">
+          <input id="pg-bot-question" type="search" name="pergunta" maxlength="240" enterkeyhint="send" placeholder="Ex.: como vencer esta missão?" aria-describedby="pg-bot-question-info" />
+          <button type="submit">Perguntar</button>
+        </div>
+        <small id="pg-bot-question-info">Perguntas interpretadas no seu aparelho, sem IA conectada ou envio de mensagens.</small>
+      </form>
+      <section class="pg-bot-response" aria-label="Resposta do PG Bot">
+        <strong id="pg-bot-answer-topic" class="pg-bot-answer-topic">Como jogar</strong>
+        <p id="pg-bot-answer" class="pg-bot-answer" role="status" aria-live="polite">Selecione um assunto para começar.</p>
+      </section>
+      <button type="button" id="pg-bot-close" class="button secondary pg-bot-close">Fechar ajuda</button>
+    </div>
+  </dialog>
+  <dialog id="classic-player" class="classic-player-dialog" aria-labelledby="classic-player-title">
+    <div class="classic-player-shell">
+      <div class="classic-player-top">
+        <div><p class="kicker">PG ESTRATÉGIA · JOGO DO ARCADE</p><h2 id="classic-player-title">Jogo</h2></div>
+        <div class="classic-player-actions">
+          <a id="classic-open-new" class="button secondary" href="../" target="_blank" rel="noopener">Abrir no Arcade em tela completa ↗</a>
+          <button id="classic-player-close" class="button primary" type="button">Fechar jogo</button>
+        </div>
+      </div>
+      <p class="classic-player-note">O jogo original é carregado somente ao abrir. Os mesmos controles e recordes do Arcade são preservados.</p>
+
+      <details class="classic-player-bot" id="classic-player-bot">
+        <summary><img src="../brand/pg-bot/mascot.webp" alt="" width="25" height="29" loading="lazy"> PG Bot · ajuda do jogo</summary>
+        <p id="classic-bot-tip" role="status" aria-live="polite">Selecione um jogo para receber orientações.</p>
+      </details>
+      <iframe id="classic-game-frame" title="Jogo do PG Arcade" allow="fullscreen" allowfullscreen></iframe>
+    </div>
+  </dialog>
+  <div id="toast" role="status" class="toast" aria-live="polite"></div>
+  <script src="./app.js" type="module"></script>
+</body>
+</html>

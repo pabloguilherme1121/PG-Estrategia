@@ -1,0 +1,17 @@
+{
+  "name": "Linha de Contenção · PG Estratégia",
+  "short_name": "Contenção PG",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#171d22",
+  "theme_color": "#2d2821",
+  "icons": [
+    {
+      "src": "../../../assets/arcade-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "pg-estrategia",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "npm run build && node scripts/run-tests.mjs",
+    "preview": "node scripts/serve.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

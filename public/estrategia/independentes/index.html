@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0b1624" />
+  <meta name="description" content="Frota Oculta, Cartas de Cerco, Hex Conexão, Damas Táticas, Patrulha Tática, Muralha das Torres, Fronteira Orbital, Refúgio do Inverno, Mercado de Rotas e Conselho dos Reinos: jogos originais de estratégia com regras próprias, dificuldades e partida completa dentro do PG Estratégia." />
+  <link rel="canonical" href="https://pabloguilherme1121.github.io/PG-Arcade/estrategia/independentes/" />
+  <link rel="icon" href="../icon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="stylesheet" href="./style.css" />
+  <title>Jogos Originais — PG Estratégia</title>
+</head>
+<body>
+<a class="skip" href="#main">Pular para o conteúdo</a>
+<div class="shell">
+  <header class="topbar">
+    <a href="../" class="brand"><span class="brand-mark" aria-hidden="true">✣</span><span>PG <strong>ESTRATÉGIA</strong><small>LABORATÓRIO DE JOGOS ORIGINAIS</small></span></a>
+    <nav aria-label="Navegação entre os sites">
+      <a href="../">Missões Estratégia</a><a href="../../">PG Arcade</a><a href="https://pabloguilherme1121.github.io/PG-portfolio/">Portfólio</a>
+    </nav>
+  </header>
+  <main id="main">
+    <section class="intro">
+      <div class="intro-copy">
+        <p class="eyebrow">COLEÇÃO ORIGINAL · PRIMEIRO LOTE</p>
+        <h1>36 jogos. <em>36 desafios diferentes.</em></h1>
+        <p>Regras independentes, adversários simulados e consequências reais para cada decisão. Esta coleção não confunde missões adicionais com novos jogos.</p>
+      </div>
+      <div class="intro-art" aria-hidden="true"><span>COMANDO TÁTICO</span><div class="art-grid"><i>◈</i><i>·</i><i>·</i><i>✦</i><i>·</i><i>·</i><i>♜</i><i>·</i><i>·</i><i>·</i><i>·</i><i>·</i><i>◇</i><i>·</i><i>·</i><i>·</i></div><small>ANALISE · EXECUTE · VENÇA</small></div>
+    </section>
+    <section class="selection" aria-label="Selecionar jogo">
+      <div class="section-header"><div><p class="eyebrow">JOGOS DE VERDADE</p><h2>Selecione seu comando</h2></div><span class="count">36 motores independentes</span></div>
+      <div class="independent-filter">
+        <label for="independent-search">Buscar jogos independentes</label>
+        <input id="independent-search" type="search" autocomplete="off" placeholder="Nome, mecânica, objetivo..." aria-describedby="independent-results" />
+        <p id="independent-results" role="status" aria-live="polite">36 de 36 jogos encontrados</p>
+        <p id="independent-empty" hidden>Nenhum jogo encontrado. Ajuste a busca.</p>
+      </div>
+      <div class="choices" role="group" aria-label="Jogo ativo">
+        <button type="button" class="choice naval" data-select="frota-oculta" aria-pressed="true"><span class="choice-symbol" aria-hidden="true">◈</span><span><strong>Frota Oculta</strong><small>Dedução naval, sonar e defesa da base</small></span><span aria-hidden="true">↗</span></button>
+        <button type="button" class="choice siege" data-select="cartas-de-cerco" aria-pressed="false"><span class="choice-symbol" aria-hidden="true">♜</span><span><strong>Cartas de Cerco</strong><small>Baralho, recursos e combate por turnos</small></span><span aria-hidden="true">↗</span></button>
+        <button type="button" class="choice hex" data-select="hex-conexao" aria-pressed="false"><span class="choice-symbol" aria-hidden="true">⬡</span><span><strong>Hex Conexão</strong><small>Conecte territórios antes do adversário</small></span><span aria-hidden="true">↗</span></button>
+        <button type="button" class="choice draughts" data-select="damas-taticas" aria-pressed="false"><span class="choice-symbol" aria-hidden="true">♔</span><span><strong>Damas Táticas</strong><small>Capturas, promoção e adversário inteligente</small></span><span aria-hidden="true">↗</span></button>
+        <button type="button" class="choice squad" data-select="patrulha-tatica" aria-pressed="false"><span class="choice-symbol" aria-hidden="true">♞</span><span><strong>Patrulha Tática</strong><small>Combate de esquadrão, extração e terreno</small></span><span aria-hidden="true">↗</span></button>
+        <button type="button" class="choice winter" data-select="refugio-do-inverno" aria-pressed="false"><span class="choice-symbol" aria-hidden="true">❄</span><span><strong>Refúgio do Inverno</strong><small>Sobrevivência, clima, resgate e recursos</small></span><span aria-hidden="true">↗</span></button>
+        <button type="button" class="choice frontier" data-select="fronteira-orbital" aria-pressed="false"><span class="choice-symbol" aria-hidden="true">✧</span><span><strong>Fronteira Orbital</strong><small>Exploração, colônias, pesquisa e IA rival</small></span><span aria-hidden="true">↗</span></button>
+        <button type="button" class="choice towers" data-select="muralha-das-torres" aria-pressed="false"><span class="choice-symbol" aria-hidden="true">♜</span><span><strong>Muralha das Torres</strong><small>Construa, aprimore e resista às ondas</small></span><span aria-hidden="true">↗</span></button>
+        <button type="button" class="choice market" data-select="mercado-de-sombras" aria-pressed="false"><span class="choice-symbol" aria-hidden="true">◉</span><span><strong>Mercado de Sombras</strong><small>Leilões, lances, coleção e rival</small></span><span aria-hidden="true">↗</span></button>
+        <a class="choice council" href="./conselho-de-reinos/"><span class="choice-symbol" aria-hidden="true">✥</span><span><strong>Conselho dos Reinos</strong><small>Diplomacia, coalizões, votos e influência rival</small></span><span aria-hidden="true">↗</span></a>
+        <a class="choice trade" href="./mercado-de-rotas/"><span class="choice-symbol" aria-hidden="true">◎</span><span><strong>Mercado de Rotas</strong><small>Economia, logística, preços e rivais</small></span><span aria-hidden="true">↗</span></a>
+        <a class="choice reversi" href="./reversi-tatico/"><span class="choice-symbol" aria-hidden="true">●</span><span><strong>Reversi Tático</strong><small>Virar peças, cercar linhas e dominar cantos contra IA</small></span><span aria-hidden="true">↗</span></a>
+        <a class="choice" href="./cifras-reais/"><span class="choice-symbol" aria-hidden="true">◆</span><span><strong>Cifras Reais</strong><small>Dedução, pistas e sequências com dois modos</small></span><span aria-hidden="true">↗</span></a>
+        <a class="choice" href="./comando-de-drones/"><span class="choice-symbol" aria-hidden="true">◉</span><span><strong>Comando de Drones</strong><small>Programação de ordens, patrulha e gestão de energia</small></span><span aria-hidden="true">↗</span></a>
+        <a class="choice" href="./oficina-automatos/"><span class="choice-symbol" aria-hidden="true">⚙</span><span><strong>Oficina de Autômatos</strong><small>Mineração, fundição, montagem e calor</small></span><span aria-hidden="true">↗</span></a>
+        <a class="choice" href="./controle-trafego/"><span class="choice-symbol" aria-hidden="true">◉</span><span><strong>Controle de Tráfego</strong><small>Semáforos, filas e prioridade de resgate</small></span><span aria-hidden="true">↗</span></a>
+        <a class="choice" href="./malha-energia/"><span class="choice-symbol" aria-hidden="true">◉</span><span><strong>Malha de Energia</strong><small>Paridade de circuitos, lógica e limites de comandos</small></span><span aria-hidden="true">↗</span></a>
+        <a class="choice" href="./pontes-arquipelago/"><span class="choice-symbol" aria-hidden="true">◉</span><span><strong>Pontes do Arquipélago</strong><small>Redes de ilhas, custos de ligação e caminhos redundantes</small></span><span aria-hidden="true">↗</span></a>
+        <a class="choice" href="./torre-logistica/"><span class="choice-symbol" aria-hidden="true">◉</span><span><strong>Torre Logística</strong><small>Discos, manobras legais e solução estratégica</small></span><span aria-hidden="true">↗</span></a>
+        <a class="choice" href="./guardioes-biomas/"><span class="choice-symbol" aria-hidden="true">✿</span><span><strong>Guardiões dos Biomas</strong><small>Previsão climática, proteção e restauração de regiões</small></span><span aria-hidden="true">↗</span></a>
+        <a class="choice" href="./rede-frequencias/"><span class="choice-symbol" aria-hidden="true">⌁</span><span><strong>Rede de Frequências</strong><small>Alocação de canais, interferência e grafos conectados</small></span><span aria-hidden="true">↗</span></a>
+        <a class="choice" href="./central-resgates/"><span class="choice-symbol" aria-hidden="true">R</span><span><strong>Central de Resgates</strong><small>Despacho por prazos, duração e prioridades</small></span><span aria-hidden="true">↗</span></a>
+        <a class="choice" href="./linha-contencao/"><span class="choice-symbol" aria-hidden="true">♨</span><span><strong>Linha de Contenção</strong><small>Incêndios, faixas de proteção e decisões por turno</small></span><span aria-hidden="true">↗</span></a>
+        <a class="choice" href="./espelhos-sinal/"><span class="choice-symbol" aria-hidden="true">◇</span><span><strong>Espelhos de Sinal</strong><small>Direcione feixes por espelhos, com circuitos simples e duplos</small></span><span aria-hidden="true">↗</span></a>
+        <a class="choice" href="./armazem-tatico/"><span class="choice-symbol" aria-hidden="true">▣</span><span><strong>Armazém Tático</strong><small>Empurre cargas para destinos sem prendê-las nas paredes</small></span><span aria-hidden="true">↗</span></a>
+        <a class="choice" href="./nonograma-tatico/"><span class="choice-symbol" aria-hidden="true">▦</span><span><strong>Nonograma Tático</strong><small>Dedução de sequências em grade, com modos de precisão e exploração</small></span><span aria-hidden="true">›</span></a>
+        <a class="choice" href="./moinhos-pedra/"><span class="choice-symbol" aria-hidden="true">◈</span><span><strong>Moinhos de Pedra</strong><small>Forme linhas, capture peças e supere a IA</small></span><span aria-hidden="true">↗</span></a>
+        <a class="choice" href="./satelites-orbitais/"><span class="choice-symbol" aria-hidden="true">◈</span><span><strong>Satélites Orbitais</strong><small>Janelas de contato, energia, tempestades e observações</small></span><span aria-hidden="true">↗</span></a>
+        <a class="choice" href="./travessia-vale/"><span class="choice-symbol" aria-hidden="true">◈</span><span><strong>Travessia do Vale</strong><small>Logística fluvial, carga limitada e pares incompatíveis</small></span><span aria-hidden="true">↗</span></a>
+        <a class="choice" href="./cofre-codigos/"><span class="choice-symbol" aria-hidden="true">⌘</span><span><strong>Cofre de Códigos</strong><small>Dedução por símbolos exatos e deslocados</small></span><span aria-hidden="true">↗</span></a>
+        <a class="choice" href="./relogios-mare/"><span class="choice-symbol" aria-hidden="true">◉</span><span><strong>Relógios da Maré</strong><small>Sincronização modular e mostradores acoplados</small></span><span aria-hidden="true">↗</span></a>
+        <a class="choice" href="./sudoku-fortaleza/"><span class="choice-symbol" aria-hidden="true">▦</span><span><strong>Sudoku da Fortaleza</strong><small>Dedução numérica, grades e restrições diagonais</small></span><span aria-hidden="true">↗</span></a>
+        <a class="choice" href="./labirinto-sombras/"><span class="choice-symbol" aria-hidden="true">L</span><span><strong>Labirinto das Sombras</strong><small>Furtividade, patrulhas móveis e rotas de infiltração</small></span><span aria-hidden="true">›</span></a>
+        <a class="choice" href="./portos-em-turnos/"><span class="choice-symbol" aria-hidden="true">P</span><span><strong>Portos em Turnos</strong><small>Dois cais simultâneos, carga compatível, chegadas e prazos</small></span><span aria-hidden="true">›</span></a>
+        <a class="choice" href="./territorios-de-pedra/"><span class="choice-symbol" aria-hidden="true">T</span><span><strong>Territórios de Pedra</strong><small>Capturas por liberdades, domínio de área e adversário local</small></span><span aria-hidden="true">›</span></a>
+        <a class="choice" href="./conves-modular/"><span class="choice-symbol" aria-hidden="true">C</span><span><strong>Convés Modular</strong><small>Encaixe espacial, rotação de cargas e equilíbrio do lastro</small></span><span aria-hidden="true">›</span></a>
+      </div>
+    </section>
+    <section class="play" aria-labelledby="game-title">
+      <div class="section-header game-header">
+        <div><p class="eyebrow">ARENA INTERATIVA</p><h2 id="game-title">Frota Oculta</h2><p id="guide"></p></div>
+        <label id="squad-mode-wrap" class="difficulty" hidden>Objetivo<select id="squad-mode" aria-label="Objetivo tático"><option value="combate">Eliminar drones</option><option value="extracao">Extrair sinal</option></select></label>
+        <label id="tower-mode-wrap" class="difficulty" hidden>Operação<select id="tower-mode" aria-label="Modo das torres"><option value="defesa">Defesa</option><option value="maratona">Maratona</option></select></label>
+        <label id="tower-type-wrap" class="difficulty" hidden>Construir<select id="tower-type" aria-label="Tipo de torre"><option value="laser">Canhão · 5 créditos</option><option value="gelo">Gelo · 4 créditos</option></select></label>
+        <label id="frontier-mode-wrap" class="difficulty" hidden>Missão<select id="frontier-mode" aria-label="Objetivo orbital"><option value="expansao">Expansão</option><option value="pesquisa">Pesquisa</option></select></label>
+        <label id="frontier-action-wrap" class="difficulty" hidden>Ordem<select id="frontier-action" aria-label="Ação orbital"><option value="scout">Explorar</option><option value="colonize">Colonizar</option></select></label>
+        <label id="winter-mode-wrap" class="difficulty" hidden>Campanha<select id="winter-mode" aria-label="Missão de inverno"><option value="resistencia">Resistência</option><option value="evacuacao">Evacuação</option></select></label>
+        <label id="market-mode-wrap" class="difficulty" hidden>Meta<select id="market-mode" aria-label="Objetivo do mercado"><option value="colecao">Quatro famílias</option><option value="patrimonio">40 pontos de patrimônio</option></select></label>
+        <label class="difficulty">Dificuldade<select id="difficulty" aria-label="Dificuldade">
+          <option value="recruta">Recruta</option><option value="tatico">Tático</option><option value="veterano">Veterano</option>
+        </select></label>
+      </div>
+      <div class="play-grid">
+        <div class="stage">
+          <div id="metrics" class="metrics" aria-label="Indicadores da partida"></div>
+          <div id="board" class="board" aria-label="Tabuleiro interativo"></div>
+          <p class="legend" id="legend"></p>
+        </div>
+        <aside class="command-panel">
+          <h3>Painel de comando</h3>
+          <p id="instructions"></p>
+          <div id="actions" class="actions"></div>
+          <p id="message" class="message" role="status" aria-live="polite"></p>
+          <p id="record" class="record"></p>
+          <section class="pg-bot-help" aria-label="PG Bot de suporte ao jogo">
+            <button type="button" id="pg-bot-toggle" aria-controls="pg-bot-body" aria-expanded="false"><img src="../../brand/pg-bot/mascot.webp" alt="" width="38" height="44" loading="lazy" decoding="async" /><span>PG Bot <small>Ajuda durante a partida</small></span></button>
+            <div id="pg-bot-body" hidden>
+              <p class="pg-bot-disclosure">Orientações automáticas locais. Não é chat de IA e não coleta mensagens.</p>
+              <div class="pg-bot-topics" role="group" aria-label="Assuntos do PG Bot">
+                <button type="button" data-pg-bot-topic="objetivo" aria-pressed="true">Objetivo</button>
+                <button type="button" data-pg-bot-topic="controles" aria-pressed="false">Controles</button>
+                <button type="button" data-pg-bot-topic="situacao" aria-pressed="false">Situação</button>
+                <button type="button" data-pg-bot-topic="dica" aria-pressed="false">Dica de estratégia</button>
+              </div>
+              <form id="pg-bot-question-form" class="pg-bot-question-form" autocomplete="off">
+                <label for="pg-bot-question">Pergunte ao PG Bot sobre o jogo atual</label>
+                <div class="pg-bot-question-row">
+                  <input id="pg-bot-question" type="search" name="pergunta" maxlength="240" enterkeyhint="send" placeholder="Ex.: qual a melhor estratégia?" />
+                  <button type="submit">Perguntar</button>
+                </div>
+                <small>Respostas calculadas no aparelho, sem enviar perguntas a servidores.</small>
+              </form>
+              <p id="pg-bot-answer" role="status" aria-live="polite"></p>
+            </div>
+          </section>
+          <button id="restart" type="button" class="restart">↻ Reiniciar partida</button>
+        </aside>
+      </div>
+    </section>
+    <section class="disclosure"><span aria-hidden="true">◎</span><div><h2>Sem duplicar jogos para aumentar o número.</h2><p>Cada título deste catálogo tem regras próprias. Os 47 atalhos de estratégia do Arcade e as 150 missões em seis sistemas continuam em seus catálogos originais. Pontuações deste laboratório ficam apenas neste aparelho.</p></div><a href="../">Voltar ao PG Estratégia ↗</a></section>
+  </main>
+  <footer><span>PG TECH · JOGOS ORIGINAIS</span><a href="../">PG Estratégia</a><a href="../../">PG Arcade</a></footer>
+</div>
+<script src="./app.js" type="module"></script>
+<script src="./search.js" type="module"></script>
+</body>
+</html>

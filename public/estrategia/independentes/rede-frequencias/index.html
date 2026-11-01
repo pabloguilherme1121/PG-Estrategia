@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#152d4a">
+<meta name="description" content="Rede de Frequências: estratégia de alocação de canais sem interferência, três dificuldades, dicas seguras e jogabilidade mobile.">
+<title>Rede de Frequências | PG Estratégia</title>
+<link rel="stylesheet" href="./style.css">
+<link rel="manifest" href="./manifest.webmanifest">
+</head>
+<body>
+<a class="skip" href="#main">Pular para o jogo</a>
+<div class="shell">
+<header class="topbar">
+<a class="brand" href="../">PG <strong>ESTRATÉGIA</strong></a>
+<nav aria-label="Navegação de projetos"><a href="../">Jogos independentes</a><a href="../../">Missões</a><a href="../../../">PG Arcade</a></nav>
+</header>
+<main id="main">
+<p class="eyebrow">JOGO ORIGINAL · REDES E INTERFERÊNCIA</p>
+<h1>Rede de <em>Frequências</em></h1>
+<p class="intro">Cada estação precisa de um canal. Estações conectadas não podem usar o mesmo canal. Use a lista de conexões para distribuir as frequências sem esgotar suas alterações.</p>
+<section class="settings" aria-label="Configurar partida">
+<label>Modo<select id="mode" aria-label="Modo"><option value="distribuir">Distribuir · três canais</option><option value="economizar">Economizar · dois canais</option></select></label>
+<label>Dificuldade<select id="difficulty" aria-label="Dificuldade"><option value="recruta">Recruta · 6 estações</option><option value="tatico">Tático · 8 estações</option><option value="veterano">Veterano · 11 estações</option></select></label>
+<button id="new" type="button">Nova rede</button>
+</section>
+<div class="layout">
+<section class="arena" aria-labelledby="arena-title">
+<div class="arena-header"><h2 id="arena-title">Painel de distribuição</h2><span id="phase" data-phase="playing">Em andamento</span></div>
+<div class="metrics">
+<p>Estações configuradas <strong id="progress">0/6</strong></p>
+<p>Alterações <strong id="moves">0/18</strong></p>
+<p>Melhor resultado <strong id="record">Nenhum</strong></p>
+</div>
+<p id="selected-label" class="selected">Canal selecionado: 1</p>
+<div id="channels" class="channels" role="group" aria-label="Escolha o canal de frequência">
+<button type="button" class="channel" data-channel="0" aria-pressed="true">Canal 1</button>
+<button type="button" class="channel" data-channel="1" aria-pressed="false">Canal 2</button>
+<button type="button" class="channel" data-channel="2" aria-pressed="false">Canal 3</button>
+</div>
+<div id="network" class="network" role="group" aria-label="Estações da rede"></div>
+<p id="status" class="status" role="status" aria-live="polite"></p>
+<div class="controls">
+<button id="clear-mode" type="button" aria-pressed="false">Remover canal: não</button>
+<button id="undo" type="button">Desfazer</button>
+<button id="hint" type="button">Mostrar dica</button>
+<button id="pause" type="button" aria-pressed="false">Pausar</button>
+</div>
+<p id="hint-text" class="hint" role="status" aria-live="polite">Dica disponível sem custo.</p>
+</section>
+<aside class="help">
+<h2>Como jogar</h2>
+<p>Escolha um canal e toque em uma estação. Leia suas conexões: nenhuma estação vizinha pode ter o mesmo canal. Você pode trocar um canal, remover uma atribuição ou desfazer a última alteração.</p>
+<p><strong>Distribuir:</strong> três canais e redes com um triângulo de interferência. <strong>Economizar:</strong> apenas dois canais, exigindo separação eficiente dos grupos.</p>
+<p>Os níveis mudam a quantidade de estações, as conexões e o limite de alterações. Uma dica indica um movimento compatível com uma solução completa, sem jogar automaticamente.</p>
+<details id="pg-bot"><summary>PG Bot · Ajuda local</summary>
+<p>Suporte contextual sem conexão externa ou envio de dados.</p>
+<div class="topics"><button type="button" data-help="objetivo">Objetivo</button><button type="button" data-help="controles">Controles</button><button type="button" data-help="situacao">Situação</button></div>
+<p id="bot-answer" role="status" aria-live="polite">Escolha uma pergunta para ver a resposta.</p>
+</details>
+</aside>
+</div>
+</main>
+<footer><a href="../">Outros jogos</a><a href="../../">PG Estratégia</a><a href="../../../">PG Arcade</a><small>Gratuito · Recordes apenas neste navegador</small></footer>
+</div>
+<script type="module" src="./app.js"></script>
+<!-- PG_BOT_ASK_BRIDGE_START -->
+<script>
+// PG Bot: acessibilidade e perguntas locais para os 27 jogos independentes.
+// Este arquivo é incorporado aos respectivos index.html para funcionar offline.
+(() => {
+  const plain = value => String(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const init = () => {
+    const panel = document.getElementById('pg-bot');
+    if (!panel || panel.querySelector('.pg-bot-ask')) return;
+    // Cada sub-jogo usa nomes de data-* diferentes; os três botões nativos são a fonte de verdade.
+    const topics = [...panel.querySelectorAll('button')];
+    if (topics.length < 2) return;
+    const style = document.createElement('style');
+    style.textContent = '.pg-bot-ask{margin-top:14px;display:grid;gap:8px;min-width:0}.pg-bot-ask label{font-size:13px;font-weight:750;line-height:1.45}.pg-bot-ask-row{display:flex;flex-wrap:wrap;gap:8px}.pg-bot-ask input{flex:1 1 150px;min-width:0;max-width:100%;min-height:44px;padding:10px;border:1px solid #9cc5d5;border-radius:9px;background:#10293b;color:#fff;font:inherit}.pg-bot-ask button{min-height:44px;border-radius:9px;border:1px solid #c0ee96;background:#c0ee96;color:#14291f;padding:9px 13px;font:inherit;font-weight:800;cursor:pointer}.pg-bot-ask :is(input,button):focus-visible{outline:3px solid #dcffac;outline-offset:3px}.pg-bot-ask small{font-size:11px;line-height:1.5;color:#d2e6ef}.pg-bot-ask-status{margin:0;min-height:0;line-height:1.5;font-size:13px;overflow-wrap:anywhere;color:#e1f2fa}';
+    document.head.append(style);
+    const form = document.createElement('form');
+    form.className = 'pg-bot-ask';
+    form.autocomplete = 'off';
+    const label = document.createElement('label');
+    label.htmlFor = 'pg-bot-ask-input';
+    label.textContent = 'Pergunte ao PG Bot sobre este jogo';
+    const row = document.createElement('div');
+    row.className = 'pg-bot-ask-row';
+    const field = document.createElement('input');
+    field.id = 'pg-bot-ask-input';
+    field.type = 'search';
+    field.name = 'pergunta';
+    field.maxLength = 240;
+    field.placeholder = 'Ex.: como vencer?';
+    field.setAttribute('enterkeyhint', 'send');
+    const submit = document.createElement('button');
+    submit.type = 'submit';
+    submit.textContent = 'Perguntar';
+    row.append(field, submit);
+    const description = document.createElement('small');
+    description.textContent = 'Respostas prontas do jogo atual, sem IA conectada e sem envio da pergunta.';
+    const status = document.createElement('p');
+    status.className = 'pg-bot-ask-status';
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    form.append(label,row,description,status);
+    panel.append(form);
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      const question = plain(field.value.trim());
+      if (/offline|sem internet|sem rede|sem conexao|desconectad/.test(question)) {
+        status.textContent = 'O jogo pode funcionar offline depois de carregar os arquivos neste aparelho. Na primeira visita ou sem cache disponível, é necessário acessar a internet.';
+        return;
+      }
+      let wanted = '';
+      if (/situac|status|estado|turno|placar|pontos|pontu|record|progresso|minha partida/.test(question)) wanted = 'status';
+      else if (/dica|estrateg|como venc|ganhar|como ganh|melhor jogad|proximo passo/.test(question)) wanted = 'strategy';
+      else if (/teclado|teclas|controles|comandos|como mover|como tocar|mouse|toque|botao/.test(question)) wanted = 'controls';
+      else if (/objetivo|como jog|regras|comec|iniciar|preciso fazer|qual a meta/.test(question)) wanted = 'objective';
+      const find = pattern => topics.find(button => pattern.test(plain(button.textContent)));
+      const selected = wanted === 'status' ? find(/situac|status/) :
+        wanted === 'strategy' ? (find(/estrateg|dica/) || find(/objetivo/)) :
+        wanted === 'controls' ? find(/control/) :
+        wanted === 'objective' ? (find(/objetivo/) || find(/control/)) : null;
+      if (selected) {
+        status.textContent = '';
+        selected.click();
+      } else {
+        status.textContent = 'Posso orientar sobre objetivo, estratégia, controles, situação e uso offline. Escolha uma opção acima ou escreva outra pergunta.';
+      }
+    });
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
+  else init();
+})();
+</script>
+<!-- PG_BOT_ASK_BRIDGE_END -->
+</body>
+</html>

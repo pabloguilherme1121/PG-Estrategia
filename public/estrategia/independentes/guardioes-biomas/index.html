@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0d302a">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Guardiões dos Biomas: jogo de estratégia com eventos climáticos, proteção, restauração, suprimentos, três dificuldades e dois objetivos.">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <title>Guardiões dos Biomas | PG Estratégia</title>
+</head>
+<body>
+<a class="skip" href="#main">Pular para o jogo</a>
+<div class="shell">
+  <header>
+    <a class="brand" href="../">PG <strong>ESTRATÉGIA</strong></a>
+    <nav aria-label="Navegação de projetos"><a href="../">Jogos originais</a><a href="../../">Missões</a><a href="../../../">PG Arcade</a></nav>
+  </header>
+  <main id="main">
+    <p class="eyebrow">JOGO ORIGINAL · GESTÃO ECOLÓGICA EM TURNOS</p>
+    <h1>Guardiões <em>dos Biomas</em></h1>
+    <p class="intro">Proteja Mata, Costa e Serra contra o clima. Antes de cada rodada, você vê onde a próxima ameaça vai atingir. Decida como distribuir proteção, restauração e suprimentos.</p>
+    <section class="settings" aria-label="Configurar partida">
+      <label>Objetivo<select id="mode"><option value="conservar">Conservar · sobreviver a todas as rodadas</option><option value="recuperar">Recuperar · terminar com vida mínima 5</option></select></label>
+      <label>Dificuldade<select id="difficulty"><option value="recruta">Recruta · 8 rodadas</option><option value="tatico">Tático · 10 rodadas</option><option value="veterano">Veterano · 12 rodadas</option></select></label>
+      <button type="button" id="new">Reiniciar missão</button>
+    </section>
+    <div class="layout">
+      <section class="arena" aria-labelledby="arena-title">
+        <div class="arena-heading"><h2 id="arena-title">Centro de conservação</h2><span id="phase" data-phase="playing">Em andamento</span></div>
+        <div class="metrics">
+          <p>Rodada <strong id="round">1/8</strong></p>
+          <p>Suprimentos <strong id="supplies">7</strong></p>
+          <p>Ações restantes <strong id="actions">2</strong></p>
+          <p>Melhor pontuação <strong id="record">Nenhuma</strong></p>
+        </div>
+        <p class="forecast" id="forecast" role="status" aria-live="polite"></p>
+        <div class="regions" id="regions" role="group" aria-label="Regiões para proteger">
+          <article class="region" data-index="0"><div class="region-top"><h3>Mata</h3><span class="forecast-tag">Próxima ameaça</span></div><p>Vida: <strong data-health>7/9</strong> · Proteção: <strong data-shield>0</strong></p><div class="region-actions"><button type="button" data-action="blindar">Proteger · 2</button><button type="button" data-action="restaurar">Restaurar · 1</button></div></article>
+          <article class="region" data-index="1"><div class="region-top"><h3>Costa</h3><span class="forecast-tag">Próxima ameaça</span></div><p>Vida: <strong data-health>7/9</strong> · Proteção: <strong data-shield>0</strong></p><div class="region-actions"><button type="button" data-action="blindar">Proteger · 2</button><button type="button" data-action="restaurar">Restaurar · 1</button></div></article>
+          <article class="region" data-index="2"><div class="region-top"><h3>Serra</h3><span class="forecast-tag">Próxima ameaça</span></div><p>Vida: <strong data-health>7/9</strong> · Proteção: <strong data-shield>0</strong></p><div class="region-actions"><button type="button" data-action="blindar">Proteger · 2</button><button type="button" data-action="restaurar">Restaurar · 1</button></div></article>
+        </div>
+        <div class="controls"><button id="collect" type="button">Coletar +2 suprimentos</button><button id="advance" type="button" class="primary">Avançar rodada</button><button id="pause" type="button">Pausar</button><button id="undo" type="button">Desfazer</button></div>
+        <p id="status" role="status" aria-live="polite" class="status"></p>
+      </section>
+      <aside class="instructions">
+        <h2>Como jogar</h2>
+        <p>Você tem até <strong>duas ações por rodada</strong>. Proteger custa 2 suprimentos e absorve até 3 impactos. Restaurar custa 1 e recupera 1 de vida. Coletar devolve 2 suprimentos.</p>
+        <p>Ao avançar, o clima atinge a região anunciada. Se qualquer bioma chegar a 0 de vida, a partida termina. No modo Recuperar, os três devem terminar com pelo menos 5 de vida.</p>
+        <p>Use toque, mouse ou teclado. Enter e Espaço acionam os botões. Os resultados ficam somente neste navegador.</p>
+        <details id="pg-bot"><summary>PG Bot · Ajuda local</summary><p>Respostas locais, sem envio de dados ou serviço externo.</p><div class="topics"><button type="button" data-help="objetivo">Objetivo</button><button type="button" data-help="controles">Controles</button><button type="button" data-help="situacao">Situação</button></div><p id="bot-answer" role="status" aria-live="polite">Escolha uma pergunta para ver a resposta.</p></details>
+      </aside>
+    </div>
+  </main>
+  <footer><a href="../">Outros jogos</a><a href="../../">PG Estratégia</a><a href="../../../">PG Arcade</a><small>Gratuito · Sem conta · Recordes locais</small></footer>
+</div>
+<script type="module" src="./app.js"></script>
+<!-- PG_BOT_ASK_BRIDGE_START -->
+<script>
+// PG Bot: acessibilidade e perguntas locais para os 27 jogos independentes.
+// Este arquivo é incorporado aos respectivos index.html para funcionar offline.
+(() => {
+  const plain = value => String(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const init = () => {
+    const panel = document.getElementById('pg-bot');
+    if (!panel || panel.querySelector('.pg-bot-ask')) return;
+    // Cada sub-jogo usa nomes de data-* diferentes; os três botões nativos são a fonte de verdade.
+    const topics = [...panel.querySelectorAll('button')];
+    if (topics.length < 2) return;
+    const style = document.createElement('style');
+    style.textContent = '.pg-bot-ask{margin-top:14px;display:grid;gap:8px;min-width:0}.pg-bot-ask label{font-size:13px;font-weight:750;line-height:1.45}.pg-bot-ask-row{display:flex;flex-wrap:wrap;gap:8px}.pg-bot-ask input{flex:1 1 150px;min-width:0;max-width:100%;min-height:44px;padding:10px;border:1px solid #9cc5d5;border-radius:9px;background:#10293b;color:#fff;font:inherit}.pg-bot-ask button{min-height:44px;border-radius:9px;border:1px solid #c0ee96;background:#c0ee96;color:#14291f;padding:9px 13px;font:inherit;font-weight:800;cursor:pointer}.pg-bot-ask :is(input,button):focus-visible{outline:3px solid #dcffac;outline-offset:3px}.pg-bot-ask small{font-size:11px;line-height:1.5;color:#d2e6ef}.pg-bot-ask-status{margin:0;min-height:0;line-height:1.5;font-size:13px;overflow-wrap:anywhere;color:#e1f2fa}';
+    document.head.append(style);
+    const form = document.createElement('form');
+    form.className = 'pg-bot-ask';
+    form.autocomplete = 'off';
+    const label = document.createElement('label');
+    label.htmlFor = 'pg-bot-ask-input';
+    label.textContent = 'Pergunte ao PG Bot sobre este jogo';
+    const row = document.createElement('div');
+    row.className = 'pg-bot-ask-row';
+    const field = document.createElement('input');
+    field.id = 'pg-bot-ask-input';
+    field.type = 'search';
+    field.name = 'pergunta';
+    field.maxLength = 240;
+    field.placeholder = 'Ex.: como vencer?';
+    field.setAttribute('enterkeyhint', 'send');
+    const submit = document.createElement('button');
+    submit.type = 'submit';
+    submit.textContent = 'Perguntar';
+    row.append(field, submit);
+    const description = document.createElement('small');
+    description.textContent = 'Respostas prontas do jogo atual, sem IA conectada e sem envio da pergunta.';
+    const status = document.createElement('p');
+    status.className = 'pg-bot-ask-status';
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    form.append(label,row,description,status);
+    panel.append(form);
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      const question = plain(field.value.trim());
+      if (/offline|sem internet|sem rede|sem conexao|desconectad/.test(question)) {
+        status.textContent = 'O jogo pode funcionar offline depois de carregar os arquivos neste aparelho. Na primeira visita ou sem cache disponível, é necessário acessar a internet.';
+        return;
+      }
+      let wanted = '';
+      if (/situac|status|estado|turno|placar|pontos|pontu|record|progresso|minha partida/.test(question)) wanted = 'status';
+      else if (/dica|estrateg|como venc|ganhar|como ganh|melhor jogad|proximo passo/.test(question)) wanted = 'strategy';
+      else if (/teclado|teclas|controles|comandos|como mover|como tocar|mouse|toque|botao/.test(question)) wanted = 'controls';
+      else if (/objetivo|como jog|regras|comec|iniciar|preciso fazer|qual a meta/.test(question)) wanted = 'objective';
+      const find = pattern => topics.find(button => pattern.test(plain(button.textContent)));
+      const selected = wanted === 'status' ? find(/situac|status/) :
+        wanted === 'strategy' ? (find(/estrateg|dica/) || find(/objetivo/)) :
+        wanted === 'controls' ? find(/control/) :
+        wanted === 'objective' ? (find(/objetivo/) || find(/control/)) : null;
+      if (selected) {
+        status.textContent = '';
+        selected.click();
+      } else {
+        status.textContent = 'Posso orientar sobre objetivo, estratégia, controles, situação e uso offline. Escolha uma opção acima ou escreva outra pergunta.';
+      }
+    });
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
+  else init();
+})();
+</script>
+<!-- PG_BOT_ASK_BRIDGE_END -->
+</body>
+</html>

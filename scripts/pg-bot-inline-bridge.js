@@ -1,0 +1,68 @@
+// PG Bot: acessibilidade e perguntas locais para os 27 jogos independentes.
+// Este arquivo é incorporado aos respectivos index.html para funcionar offline.
+(() => {
+  const plain = value => String(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const init = () => {
+    const panel = document.getElementById('pg-bot');
+    if (!panel || panel.querySelector('.pg-bot-ask')) return;
+    // Cada sub-jogo usa nomes de data-* diferentes; os três botões nativos são a fonte de verdade.
+    const topics = [...panel.querySelectorAll('button')];
+    if (topics.length < 2) return;
+    const style = document.createElement('style');
+    style.textContent = '.pg-bot-ask{margin-top:14px;display:grid;gap:8px;min-width:0}.pg-bot-ask label{font-size:13px;font-weight:750;line-height:1.45}.pg-bot-ask-row{display:flex;flex-wrap:wrap;gap:8px}.pg-bot-ask input{flex:1 1 150px;min-width:0;max-width:100%;min-height:44px;padding:10px;border:1px solid #9cc5d5;border-radius:9px;background:#10293b;color:#fff;font:inherit}.pg-bot-ask button{min-height:44px;border-radius:9px;border:1px solid #c0ee96;background:#c0ee96;color:#14291f;padding:9px 13px;font:inherit;font-weight:800;cursor:pointer}.pg-bot-ask :is(input,button):focus-visible{outline:3px solid #dcffac;outline-offset:3px}.pg-bot-ask small{font-size:11px;line-height:1.5;color:#d2e6ef}.pg-bot-ask-status{margin:0;min-height:0;line-height:1.5;font-size:13px;overflow-wrap:anywhere;color:#e1f2fa}';
+    document.head.append(style);
+    const form = document.createElement('form');
+    form.className = 'pg-bot-ask';
+    form.autocomplete = 'off';
+    const label = document.createElement('label');
+    label.htmlFor = 'pg-bot-ask-input';
+    label.textContent = 'Pergunte ao PG Bot sobre este jogo';
+    const row = document.createElement('div');
+    row.className = 'pg-bot-ask-row';
+    const field = document.createElement('input');
+    field.id = 'pg-bot-ask-input';
+    field.type = 'search';
+    field.name = 'pergunta';
+    field.maxLength = 240;
+    field.placeholder = 'Ex.: como vencer?';
+    field.setAttribute('enterkeyhint', 'send');
+    const submit = document.createElement('button');
+    submit.type = 'submit';
+    submit.textContent = 'Perguntar';
+    row.append(field, submit);
+    const description = document.createElement('small');
+    description.textContent = 'Respostas prontas do jogo atual, sem IA conectada e sem envio da pergunta.';
+    const status = document.createElement('p');
+    status.className = 'pg-bot-ask-status';
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    form.append(label,row,description,status);
+    panel.append(form);
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      const question = plain(field.value.trim());
+      if (/offline|sem internet|sem rede|sem conexao|desconectad/.test(question)) {
+        status.textContent = 'O jogo pode funcionar offline depois de carregar os arquivos neste aparelho. Na primeira visita ou sem cache disponível, é necessário acessar a internet.';
+        return;
+      }
+      let wanted = '';
+      if (/situac|status|estado|turno|placar|pontos|pontu|record|progresso|minha partida/.test(question)) wanted = 'status';
+      else if (/dica|estrateg|como venc|ganhar|como ganh|melhor jogad|proximo passo/.test(question)) wanted = 'strategy';
+      else if (/teclado|teclas|controles|comandos|como mover|como tocar|mouse|toque|botao/.test(question)) wanted = 'controls';
+      else if (/objetivo|como jog|regras|comec|iniciar|preciso fazer|qual a meta/.test(question)) wanted = 'objective';
+      const find = pattern => topics.find(button => pattern.test(plain(button.textContent)));
+      const selected = wanted === 'status' ? find(/situac|status/) :
+        wanted === 'strategy' ? (find(/estrateg|dica/) || find(/objetivo/)) :
+        wanted === 'controls' ? find(/control/) :
+        wanted === 'objective' ? (find(/objetivo/) || find(/control/)) : null;
+      if (selected) {
+        status.textContent = '';
+        selected.click();
+      } else {
+        status.textContent = 'Posso orientar sobre objetivo, estratégia, controles, situação e uso offline. Escolha uma opção acima ou escreva outra pergunta.';
+      }
+    });
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
+  else init();
+})();

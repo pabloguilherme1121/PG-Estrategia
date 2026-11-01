@@ -1,0 +1,11 @@
+{
+  "name": "Territórios de Pedra | PG Estratégia",
+  "short_name": "Territórios",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#08151f",
+  "theme_color": "#0e2530",
+  "lang": "pt-BR"
+}

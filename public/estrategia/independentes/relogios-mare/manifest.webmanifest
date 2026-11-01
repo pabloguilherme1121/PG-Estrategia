@@ -1,0 +1,10 @@
+{
+  "name": "Relógios da Maré | PG Estratégia",
+  "short_name": "Relógios",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#07151f",
+  "theme_color": "#0d2a36",
+  "lang": "pt-BR"
+}

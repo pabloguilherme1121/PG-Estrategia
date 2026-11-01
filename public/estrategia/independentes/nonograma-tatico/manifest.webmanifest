@@ -1,0 +1,10 @@
+{
+  "name": "Nonograma Tático | PG Estratégia",
+  "short_name": "Nonograma",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#102c38",
+  "theme_color": "#102c38",
+  "lang": "pt-BR"
+}

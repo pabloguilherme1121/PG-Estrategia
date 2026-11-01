@@ -1,0 +1,10 @@
+{
+  "name": "Travessia do Vale | PG Estratégia",
+  "short_name": "Travessia",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#07131e",
+  "theme_color": "#102a3d",
+  "lang": "pt-BR"
+}
