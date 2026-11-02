@@ -53,6 +53,21 @@ export class TurnTacticsEngine {
   }
   return Infinity;
  }
+ #distanceToAttack(from,target,range){
+  if(distance(from,target)<=range)return 0;
+  const seen=new Set([from.x+','+from.y]),queue=[{x:from.x,y:from.y,steps:0}];
+  for(let i=0;i<queue.length;i++){
+   const current=queue[i];
+   for(const next of this.#neighbors(current.x,current.y)){
+    const cell=this.#cell(next.x,next.y),id=next.x+','+next.y;
+    if(!cell||cell.terrain==='obstacle'||cell.unit||seen.has(id))continue;
+    if(distance(next,target)<=range)return current.steps+1;
+    seen.add(id);
+    queue.push({...next,steps:current.steps+1});
+   }
+  }
+  return Infinity;
+ }
  #attack(attacker,target){
   if(!attacker?.cell.unit||!target?.cell.unit||attacker.cell.unit.team===target.cell.unit.team)
    return fail('Atacante ou alvo inválido.');
@@ -104,8 +119,8 @@ export class TurnTacticsEngine {
    const choices=this.#neighbors(from.x,from.y).filter(p=>{
     const c=this.#cell(p.x,p.y);return c&&c.terrain!=='obstacle'&&!c.unit;
    });
-   choices.sort((a,b)=>distance(a,target)-distance(b,target)||a.y-b.y||a.x-b.x);
-   const next=choices.find(p=>distance(p,target)<distance(from,target));
+   choices.sort((a,b)=>this.#distanceToAttack(a,target,unit.attackRange)-this.#distanceToAttack(b,target,unit.attackRange)||a.y-b.y||a.x-b.x);
+   const next=choices.find(p=>Number.isFinite(this.#distanceToAttack(p,target,unit.attackRange)));
    if(next&&unit.ap>0){this.#cell(next.x,next.y).unit=unit;from.cell.unit=null;unit.ap--;}
   }
  }

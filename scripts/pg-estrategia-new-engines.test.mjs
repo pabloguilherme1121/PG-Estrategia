@@ -57,3 +57,16 @@ test('tática: alterações no snapshot não afetam unidades do motor',()=>{
  snapshot.grid[0][0].unit.hp=0;
  assert.equal(g.getState().grid[0][0].unit.hp,8);
 });
+
+test('tática: IA encontra desvio quando o obstáculo exige afastar-se primeiro',()=>{
+ const g=new TurnTacticsEngine({maxTurns:8},{turn:1,activeTeam:'player',grid:[
+  [{terrain:'plain',unit:null},{terrain:'plain',unit:null},{terrain:'plain',unit:null}],
+  [{terrain:'plain',unit:{id:'e',team:'enemy',hp:8,maxHp:8,ap:1,maxAp:1,attackDamage:2,attackRange:1}},{terrain:'obstacle',unit:null},{terrain:'plain',unit:{id:'p',team:'player',hp:8,maxHp:8,ap:2,maxAp:2,attackDamage:2,attackRange:1}}],
+  [{terrain:'plain',unit:null},{terrain:'plain',unit:null},{terrain:'plain',unit:null}]
+ ]});
+ assert.equal(g.processAction({type:'END_TURN'}).success,true);
+ const grid=g.getState().grid;
+ assert.equal(grid[1][0].unit,null,'inimigo não deve ficar parado diante do obstáculo');
+ assert.ok(grid[0][0].unit?.id==='e'||grid[2][0].unit?.id==='e','IA deve contornar por cima ou por baixo');
+ assert.equal(g.getState().turn,2);
+});
