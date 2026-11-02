@@ -1,6 +1,6 @@
-const CACHE='pg-estrategia-dominio-territorial-v1';
+const CACHE='pg-estrategia-dominio-territorial-v2';
 const ROOT=new URL('./',self.registration.scope);
-const ASSETS=['./','./index.html','./app.js','./engine.mjs','./style.css','./manifest.webmanifest','./game.meta.json'];
+const ASSETS=['./','./index.html','./app.js','./engine.mjs','./telemetry.mjs','./style.css','./manifest.webmanifest','./game.meta.json'];
 const ALLOWED=new Set(ASSETS.map(path=>new URL(path,ROOT).pathname));
 self.addEventListener('install',event=>{
  event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS))

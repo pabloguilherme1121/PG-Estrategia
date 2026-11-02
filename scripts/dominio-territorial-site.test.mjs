@@ -18,11 +18,12 @@ test('manifesto do PG Bot descreve controles e plano verificáveis',()=>{
 });
 test('service worker isola arquivos, escopo e cache por jogo',()=>{
  const sw=read('sw.js');
- assert.match(sw,/pg-estrategia-dominio-territorial-v1/);
+ assert.match(sw,/pg-estrategia-dominio-territorial-v2/);
  assert.match(sw,/url\.origin!==self\.location\.origin/);
  assert.match(sw,/url\.pathname\.startsWith\(ROOT\.pathname\)/);
  assert.match(sw,/request\.method!=='GET'/);
  assert.match(sw,/\.\/engine\.mjs/);
+ assert.match(sw,/\.\/telemetry\.mjs/);
  assert.doesNotMatch(sw,/PG-Arcade|PG-Bot\/|localStorage/);
 });
 test('tabuleiro é SVG discreto e preserva zoom, navegação externa e acessibilidade',()=>{
