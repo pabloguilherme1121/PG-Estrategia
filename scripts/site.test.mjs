@@ -11,11 +11,11 @@ test('preserva 150 missões e seis mecânicas originais',()=>{
  assert.equal(new Set(MISSIONS.map(m=>m.id)).size,150);
  assert.equal(EXISTING_STRATEGY.length,47);
 });
-test('exporta campanha, 27 jogos independentes em pastas e PG Bot',()=>{
+test('exporta campanha, 28 jogos independentes em pastas e PG Bot',()=>{
  for(const path of ['index.html','app.js','core.mjs','sw.js','pg-bot-help.mjs','brand/pg-bot/mascot.webp','independentes/index.html','independentes/app.js','independentes/pg-bot.mjs'])
   assert.ok(existsSync(join(root,path)),path);
  const games=readdirSync(join(root,'independentes'),{withFileTypes:true}).filter(e=>e.isDirectory()&&existsSync(join(root,'independentes',e.name,'index.html')));
- assert.equal(games.length,27);
+ assert.equal(games.length,28);
 });
 test('canonical, links do Arcade e PG Bot corrigidos para o repositório independente',()=>{
  const index=read('index.html'), hub=read('strategy-hub.mjs'), orig=read('independentes/index.html');

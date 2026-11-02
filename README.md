@@ -5,7 +5,7 @@ Site próprio do PG Estratégia, extraído sem alterar ou apagar o projeto PG Ar
 ## Conteúdo
 
 - Campanha original de **150 missões**, distribuídas em seis mecânicas reais.
-- **36 jogos independentes**: nove títulos no laboratório clássico e 27 jogos em páginas próprias.
+- **37 jogos independentes**: nove títulos no laboratório clássico e 28 jogos em páginas próprias. O 37º é **Gravidade dos Cristais**, com dois cristais, dois objetivos, dois modos de movimento e três dificuldades.
 - PG Bot dentro da campanha e em todos os jogos, com ajuda local, sem serviço pago de IA.
 - PWA com cache e armazenamento de progresso no próprio navegador.
 - Biblioteca de 47 jogos históricos do PG Arcade, acessados por links oficiais. Esses 47 jogos continuam hospedados no Arcade.
