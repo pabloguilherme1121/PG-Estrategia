@@ -1,0 +1,17 @@
+{
+  "id": "dominio-territorial",
+  "title": "Domínio Territorial",
+  "category": "estrategia",
+  "engine": "hex-conquest",
+  "objective": "Capturar o bastião central neutro (0,0) e a base inimiga (0,-1) em até 20 turnos.",
+  "controls": {
+    "touch": "Toque num hexágono aliado e depois num vizinho para atacar. Use Reforçar e Encerrar turno no painel.",
+    "keyboard": "Tab percorre as células, setas movem o foco; Enter ou Espaço seleciona ou ataca, e os botões executam reforço e fim de turno."
+  },
+  "strategyPlan": [
+    "Conquiste flancos neutros para aumentar a produção de suprimentos a cada turno.",
+    "Reúna tropas suficientes para superar o multiplicador defensivo de 1,5 do bastião central.",
+    "Mantenha uma guarnição aliada enquanto avança até a base inimiga antes de 20 turnos."
+  ],
+  "version": "1.0.0"
+}
