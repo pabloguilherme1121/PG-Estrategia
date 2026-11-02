@@ -1,4 +1,5 @@
 import {createDomainGame,actDomain,domainGuidance,GAME_RULES,axialNeighbors} from './engine.mjs';
+import {startDomainLiveTelemetry} from './telemetry.mjs';
 
 const $=id=>document.getElementById(id);
 const SVG='http://www.w3.org/2000/svg';
@@ -8,6 +9,16 @@ let state=createDomainGame();
 let topic='situacao';
 let lastFocus=null;
 let records={};
+let liveSender=null;
+$('live-share').addEventListener('change',()=>{
+ liveSender?.stop();liveSender=null;
+ if($('live-share').checked){
+  liveSender=startDomainLiveTelemetry(()=>state);
+  if(!liveSender){$('live-share').checked=false;$('live-share-status').textContent='Este navegador não suporta comunicação entre abas.';return;}
+  $('live-share-status').textContent='Transmitindo nesta aba somente turno, fase e suprimentos. Desative quando quiser.';
+ }else $('live-share-status').textContent='Compartilhamento desativado.';
+});
+window.addEventListener('pagehide',()=>{liveSender?.stop();liveSender=null});
 try{
  const data=JSON.parse(localStorage.getItem(STORAGE)||'{}');
  if(data&&typeof data==='object'&&!Array.isArray(data)){
@@ -149,6 +160,7 @@ function render(){
  $('pause').disabled=!['playing','paused'].includes(state.phase);
  $('pause').textContent=state.phase==='paused'?'Retomar':'Pausar';
  botAnswer();
+ liveSender?.send();
 }
 $('deploy').addEventListener('click',()=>{lastFocus=null;if(state.selected)apply({type:'DEPLOY',target:state.selected,amount:1})});
 $('end-turn').addEventListener('click',()=>{lastFocus=null;apply({type:'END_TURN'})});
