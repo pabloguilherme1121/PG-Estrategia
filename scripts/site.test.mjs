@@ -36,3 +36,11 @@ test('todos os títulos independentes mantêm HTML e não apontam imagem para a 
   assert.ok(!html.includes('../../../brand/'),item.name+' asset antigo');
  }
 });
+
+test('PG Bot da campanha oferece acesso contextual ao site independente sem ler histórico de outros sites',()=>{
+ const html=readFileSync('public/estrategia/index.html','utf8');
+ const app=readFileSync('public/estrategia/app.js','utf8');
+ assert.ok(html.includes('id="pg-bot-site-link"'));
+ assert.ok(html.includes('https://pabloguilherme1121.github.io/PG-Bot/'));
+ assert.ok(app.includes("$('pg-bot-site-link').href='https://pabloguilherme1121.github.io/PG-Bot/?projeto=estrategia&jogo='+encodeURIComponent(id)"));
+});
