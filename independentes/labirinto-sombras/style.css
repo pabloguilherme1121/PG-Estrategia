@@ -26,7 +26,7 @@ h1{font-size:clamp(31px,5vw,58px);line-height:1.06;margin:11px 0}h1 em{font-styl
 .selectors{display:grid;gap:13px}.selectors label{display:grid;gap:5px;font-size:14px}
 select{min-height:44px;color:white;background:#092537;border:1px solid #85b5c6;border-radius:9px;padding:10px;font:inherit}
 button{font:inherit;min-height:44px;padding:9px 12px;border:1px solid #6abcc2;border-radius:10px;background:#216d7f;color:white;cursor:pointer;touch-action:manipulation}
-button:hover:not(:disabled){background:#2e8493}button:disabled{opacity:.46;cursor:not-allowed}
+button:hover:not(:disabled){background:#1d6573}button:disabled{opacity:.46;cursor:not-allowed}
 button:focus-visible,select:focus-visible,summary:focus-visible,a:focus-visible{outline:3px solid #ffe18a;outline-offset:3px}
 .pad{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;max-width:330px;margin:15px auto}
 .pad button[data-move="north"]{grid-column:2}

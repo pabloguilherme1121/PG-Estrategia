@@ -24,7 +24,7 @@ h3{font-size:18px}.targets{display:grid;grid-template-columns:repeat(2,minmax(0,
 .target strong{font-size:15px}.target small{color:#b6cbda;line-height:1.45}
 .target[data-captured="true"]{border-color:#50bda8}
 button,select{font:inherit}button{min-height:44px;padding:10px 12px;background:#207681;color:#fff;border:1px solid #62b8bb;border-radius:10px;cursor:pointer;touch-action:manipulation;font-weight:700}
-button:hover:not(:disabled){background:#268b98}button:disabled{opacity:.5;cursor:not-allowed}
+button:hover:not(:disabled){background:#1d6573}button:disabled{opacity:.5;cursor:not-allowed}
 button:focus-visible,a:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #ffe58d;outline-offset:3px}
 .selectors{display:grid;gap:12px}.selectors label{display:grid;gap:5px;font-size:14px}
 select{min-height:44px;background:#071d2b;color:#fff;border:1px solid #6590a0;border-radius:9px;padding:10px}
