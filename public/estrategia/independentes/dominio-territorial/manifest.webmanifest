@@ -1,0 +1,10 @@
+{
+  "id": "./",
+  "name": "Domínio Territorial | PG Estratégia",
+  "short_name": "Domínio Territorial",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#08121e",
+  "theme_color": "#0e1c30",
+  "lang": "pt-BR"
+}
