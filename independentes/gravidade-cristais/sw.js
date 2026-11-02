@@ -1,5 +1,5 @@
-const CACHE="pg-estrategia-gravidade-v1",ROOT=new URL("./",self.registration.scope);
-const FILES=["./","./index.html","./app.js","./engine.mjs","./style.css","./manifest.webmanifest"];
+const CACHE="pg-estrategia-gravidade-v2",ROOT=new URL("./",self.registration.scope);
+const FILES=["./","./index.html","./app.js","./engine.mjs","./telemetry-adapter.mjs","./style.css","./manifest.webmanifest"];
 const ALLOWED=new Set(FILES.map(path=>new URL(path,ROOT).pathname));
 self.addEventListener("install",event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES)).then(()=>self.skipWaiting())));
 self.addEventListener("activate",event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith("pg-estrategia-gravidade-")&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
