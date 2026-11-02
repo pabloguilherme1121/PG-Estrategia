@@ -1,0 +1,10 @@
+{
+  "name": "Labirinto das Sombras | PG Estratégia",
+  "short_name": "Sombras",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#061722",
+  "theme_color": "#102631",
+  "lang": "pt-BR"
+}

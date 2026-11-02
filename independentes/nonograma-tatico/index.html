@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#102c38"><meta name="color-scheme" content="dark">
+<meta name="description" content="Nonograma Tático: jogo independente de dedução lógica com pistas, três dificuldades, dois modos e PG Bot.">
+<link rel="stylesheet" href="./style.css"><link rel="manifest" href="./manifest.webmanifest">
+<title>Nonograma Tático | PG Estratégia</title></head><body>
+<a href="#main" class="skip">Pular para o jogo</a><div class="shell">
+<header class="masthead"><a class="brand" href="../">PG <strong>ESTRATÉGIA</strong></a>
+<nav aria-label="Navegação entre projetos"><a href="../">Jogos originais</a><a href="../../">Missões</a><a href="https://pabloguilherme1121.github.io/PG-Arcade/">PG Arcade</a></nav></header>
+<main id="main"><section class="intro"><p class="eyebrow">MOTOR ORIGINAL 26 · DEDUÇÃO LÓGICA</p>
+<h1>Nonograma <em>Tático</em></h1><p>Use as sequências de números nas linhas e colunas para descobrir as casas preenchidas. Marque também as vazias para concluir a investigação.</p></section>
+<div class="layout"><section class="panel arena" aria-label="Partida de Nonograma Tático">
+<div class="panel-head"><h2>Grade lógica</h2><span class="live-indicator">PUZZLE ATIVO</span></div>
+<div class="board-scroll"><div id="puzzle" class="puzzle" role="grid" aria-label="Pistas de linhas e colunas"></div></div>
+<p class="direction-help">Escolha preencher ou descartar. Toque em uma casa ou use Tab e Enter; as setas movem o foco na grade.</p>
+</section><aside class="panel controls" aria-label="Configurações e progresso">
+<div class="selectors"><label for="mode">Modo<select id="mode"><option value="exploracao">Exploração</option><option value="precisao">Precisão · 4 erros</option></select></label>
+<label for="difficulty">Dificuldade<select id="difficulty"><option value="recruta">Recruta · 5×5</option><option value="tatico">Tático · 6×6</option><option value="veterano">Veterano · 7×7</option></select></label></div>
+<div class="stats"><div><span class="stat-label">Jogadas</span><strong id="moves">0</strong></div>
+<div><span class="stat-label">Erros</span><strong id="errors">0</strong></div>
+<div><span class="stat-label">Acertos</span><strong id="correct">0</strong></div>
+<div><span class="stat-label">Estado</span><strong id="phase">Em andamento</strong></div></div>
+<p id="status-text" class="status" role="status" aria-live="polite">Pronto para jogar.</p>
+<div class="actions"><button id="fill" type="button" aria-pressed="true">◆ Preencher</button>
+<button id="empty" type="button" aria-pressed="false">× Descartar</button>
+<button id="pause" type="button">Pausar</button><button id="undo" type="button">Desfazer</button>
+<button id="hint" type="button">Pedir dica</button><button id="reset" type="button">Reiniciar</button></div>
+<p id="hint-text" aria-live="polite"></p>
+<details id="pg-bot" class="pg-bot"><summary>PG Bot · Suporte da operação</summary>
+<p>Ajuda local e contextual. Nenhuma informação enviada para um servidor.</p>
+<div class="bot-actions"><button type="button" data-bot="situation">Situação</button>
+<button type="button" data-bot="strategy">Estratégia</button><button type="button" data-bot="controls">Controles</button></div>
+<p id="bot-answer" role="status" aria-live="polite">Escolha uma opção.</p></details>
+</aside></div>
+<section class="disclosure"><h2>Como resolver</h2><p>Cada sequência indica blocos consecutivos preenchidos. Entre blocos há pelo menos uma casa vazia. Marque todas as casas conforme as pistas para vencer. O modo Precisão limita erros; o modo Exploração permite experimentar.</p></section>
+</main><footer><a href="../">Jogos originais</a><a href="https://pabloguilherme1121.github.io/PG-Arcade/">PG Arcade</a></footer></div>
+<script type="module" src="./app.js"></script><!-- PG_BOT_ASK_BRIDGE_START -->
+<script>
+// PG Bot: acessibilidade e perguntas locais para os 27 jogos independentes.
+// Este arquivo é incorporado aos respectivos index.html para funcionar offline.
+(() => {
+  const plain = value => String(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const init = () => {
+    const panel = document.getElementById('pg-bot');
+    if (!panel || panel.querySelector('.pg-bot-ask')) return;
+    // Cada sub-jogo usa nomes de data-* diferentes; os três botões nativos são a fonte de verdade.
+    const topics = [...panel.querySelectorAll('button')];
+    if (topics.length < 2) return;
+    const style = document.createElement('style');
+    style.textContent = '.pg-bot-ask{margin-top:14px;display:grid;gap:8px;min-width:0}.pg-bot-ask label{font-size:13px;font-weight:750;line-height:1.45}.pg-bot-ask-row{display:flex;flex-wrap:wrap;gap:8px}.pg-bot-ask input{flex:1 1 150px;min-width:0;max-width:100%;min-height:44px;padding:10px;border:1px solid #9cc5d5;border-radius:9px;background:#10293b;color:#fff;font:inherit}.pg-bot-ask button{min-height:44px;border-radius:9px;border:1px solid #c0ee96;background:#c0ee96;color:#14291f;padding:9px 13px;font:inherit;font-weight:800;cursor:pointer}.pg-bot-ask :is(input,button):focus-visible{outline:3px solid #dcffac;outline-offset:3px}.pg-bot-ask small{font-size:11px;line-height:1.5;color:#d2e6ef}.pg-bot-ask-status{margin:0;min-height:0;line-height:1.5;font-size:13px;overflow-wrap:anywhere;color:#e1f2fa}';
+    document.head.append(style);
+    const form = document.createElement('form');
+    form.className = 'pg-bot-ask';
+    form.autocomplete = 'off';
+    const label = document.createElement('label');
+    label.htmlFor = 'pg-bot-ask-input';
+    label.textContent = 'Pergunte ao PG Bot sobre este jogo';
+    const row = document.createElement('div');
+    row.className = 'pg-bot-ask-row';
+    const field = document.createElement('input');
+    field.id = 'pg-bot-ask-input';
+    field.type = 'search';
+    field.name = 'pergunta';
+    field.maxLength = 240;
+    field.placeholder = 'Ex.: como vencer?';
+    field.setAttribute('enterkeyhint', 'send');
+    const submit = document.createElement('button');
+    submit.type = 'submit';
+    submit.textContent = 'Perguntar';
+    row.append(field, submit);
+    const description = document.createElement('small');
+    description.textContent = 'Respostas prontas do jogo atual, sem IA conectada e sem envio da pergunta.';
+    const status = document.createElement('p');
+    status.className = 'pg-bot-ask-status';
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    form.append(label,row,description,status);
+    panel.append(form);
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      const question = plain(field.value.trim());
+      if (/offline|sem internet|sem rede|sem conexao|desconectad/.test(question)) {
+        status.textContent = 'O jogo pode funcionar offline depois de carregar os arquivos neste aparelho. Na primeira visita ou sem cache disponível, é necessário acessar a internet.';
+        return;
+      }
+      let wanted = '';
+      if (/situac|status|estado|turno|placar|pontos|pontu|record|progresso|minha partida/.test(question)) wanted = 'status';
+      else if (/dica|estrateg|como venc|ganhar|como ganh|melhor jogad|proximo passo/.test(question)) wanted = 'strategy';
+      else if (/teclado|teclas|controles|comandos|como mover|como tocar|mouse|toque|botao/.test(question)) wanted = 'controls';
+      else if (/objetivo|como jog|regras|comec|iniciar|preciso fazer|qual a meta/.test(question)) wanted = 'objective';
+      const find = pattern => topics.find(button => pattern.test(plain(button.textContent)));
+      const selected = wanted === 'status' ? find(/situac|status/) :
+        wanted === 'strategy' ? (find(/estrateg|dica/) || find(/objetivo/)) :
+        wanted === 'controls' ? find(/control/) :
+        wanted === 'objective' ? (find(/objetivo/) || find(/control/)) : null;
+      if (selected) {
+        status.textContent = '';
+        selected.click();
+      } else {
+        status.textContent = 'Posso orientar sobre objetivo, estratégia, controles, situação e uso offline. Escolha uma opção acima ou escreva outra pergunta.';
+      }
+    });
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
+  else init();
+})();
+</script>
+<!-- PG_BOT_ASK_BRIDGE_END -->
+</body></html>

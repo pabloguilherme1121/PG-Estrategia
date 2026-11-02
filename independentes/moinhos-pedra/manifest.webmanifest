@@ -1,0 +1,10 @@
+{
+  "name": "Moinhos de Pedra | PG Estratégia",
+  "short_name": "Moinhos",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0a1724",
+  "theme_color": "#102638",
+  "lang": "pt-BR"
+}

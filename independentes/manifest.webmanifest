@@ -1,0 +1,18 @@
+{
+  "name": "PG Estratégia — Jogos Originais",
+  "short_name": "Estratégia Jogos",
+  "description": "Frota Oculta, Cartas de Cerco e Hex Conexão",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#081321",
+  "theme_color": "#0b1624",
+  "icons": [
+    {
+      "src": "../icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Rede de Frequências · PG Estratégia",
+  "short_name": "Frequências PG",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0b1930",
+  "theme_color": "#152d4a",
+  "icons": [
+    {
+      "src": "../../../assets/arcade-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "Portos em Turnos | PG Estratégia",
+  "short_name": "Portos",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#071723",
+  "theme_color": "#102631",
+  "lang": "pt-BR"
+}

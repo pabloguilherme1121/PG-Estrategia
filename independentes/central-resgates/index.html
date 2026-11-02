@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#153a47">
+  <meta name="description" content="Central de Resgates, jogo de estratégia em que você organiza atendimentos sob prazos, prioridades e tempo limitado.">
+  <title>Central de Resgates | PG Estratégia</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="manifest" href="./manifest.webmanifest">
+</head>
+<body>
+<a class="skip" href="#main">Pular para o jogo</a>
+<div class="shell">
+  <header>
+    <a class="brand" href="../">PG <strong>ESTRATÉGIA</strong></a>
+    <nav aria-label="Navegação entre projetos"><a href="../">Jogos independentes</a><a href="../../">Missões</a><a href="https://pabloguilherme1121.github.io/PG-Arcade/">PG Arcade</a></nav>
+  </header>
+  <main id="main">
+    <p class="eyebrow">JOGO ORIGINAL · GESTÃO DE CRISES</p>
+    <h1>Central de <em>Resgates</em></h1>
+    <p class="intro">Os chamados estão chegando. Cada serviço exige tempo e tem prazo. Escolha a ordem dos atendimentos para alcançar a meta antes que o turno termine. Chamar fora do prazo consome tempo, mas não rende pontos.</p>
+    <section class="settings" aria-label="Preparar partida">
+      <label>Objetivo<select id="mode"><option value="prioridade">Prioridade · somar pontos de impacto</option><option value="pontualidade">Pontualidade · cumprir mais chamados no prazo</option></select></label>
+      <label>Dificuldade<select id="difficulty"><option value="recruta">Recruta · 6 chamados</option><option value="tatico">Tático · 8 chamados</option><option value="veterano">Veterano · 10 chamados</option></select></label>
+      <button id="new" type="button">Nova operação</button>
+    </section>
+    <div class="layout">
+      <section class="arena" aria-labelledby="arena-heading">
+        <div class="arena-heading"><h2 id="arena-heading">Quadro de operações</h2><span id="phase" data-phase="playing">Em andamento</span></div>
+        <div class="metrics">
+          <p>Tempo <strong id="time">0/12</strong></p>
+          <p>Pontuação <strong id="score">0</strong></p>
+          <p>Meta <strong id="target">0</strong></p>
+          <p>Recorde <strong id="record">Nenhum</strong></p>
+        </div>
+        <p class="round-hint">Priorize chamadas com prazo curto, duração pequena ou valor alto. Não existe uma única ordem vencedora.</p>
+        <div id="jobs" class="jobs" role="group" aria-label="Chamados disponíveis"></div>
+        <p id="status" role="status" aria-live="polite" class="status">Preparando operação.</p>
+        <div class="controls">
+          <button id="undo" type="button">Desfazer</button>
+          <button id="hint" type="button">Pedir dica</button>
+          <button id="pause" type="button" aria-pressed="false">Pausar</button>
+        </div>
+        <p id="hint-text" role="status" aria-live="polite" class="hint">Dica opcional disponível.</p>
+      </section>
+      <aside class="help">
+        <h2>Regras e estratégia</h2>
+        <p>Escolha um chamado tocando no cartão. O relógio avança conforme a duração do serviço. Atendimentos concluídos dentro do prazo rendem pontos; atrasados não rendem.</p>
+        <p><strong>Prioridade:</strong> ganhe pontos conforme o valor de cada serviço. <strong>Pontualidade:</strong> cada serviço no prazo vale um ponto. A meta é calculada com base na melhor ordem possível para este turno.</p>
+        <p>Você pode pausar ou desfazer uma escolha. A dica recomenda um próximo atendimento com uma rota comprovada para maximizar a pontuação restante, mas não executa a ação automaticamente.</p>
+        <details id="pg-bot"><summary>PG Bot · Ajuda contextual</summary>
+          <p>Ajuda local, sem conta e sem troca de informações com servidores.</p>
+          <div class="topics"><button type="button" data-help="objetivo">Objetivo</button><button type="button" data-help="controles">Controles</button><button type="button" data-help="situacao">Situação</button></div>
+          <p id="bot-answer" role="status" aria-live="polite">Selecione uma pergunta para ver a resposta.</p>
+        </details>
+      </aside>
+    </div>
+  </main>
+  <footer><a href="../">Outros jogos</a><a href="../../">PG Estratégia</a><a href="https://pabloguilherme1121.github.io/PG-Arcade/">PG Arcade</a><small>Gratuito · Sem login · Resultados salvos apenas neste navegador</small></footer>
+</div>
+<script type="module" src="./app.js"></script>
+<!-- PG_BOT_ASK_BRIDGE_START -->
+<script>
+// PG Bot: acessibilidade e perguntas locais para os 27 jogos independentes.
+// Este arquivo é incorporado aos respectivos index.html para funcionar offline.
+(() => {
+  const plain = value => String(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const init = () => {
+    const panel = document.getElementById('pg-bot');
+    if (!panel || panel.querySelector('.pg-bot-ask')) return;
+    // Cada sub-jogo usa nomes de data-* diferentes; os três botões nativos são a fonte de verdade.
+    const topics = [...panel.querySelectorAll('button')];
+    if (topics.length < 2) return;
+    const style = document.createElement('style');
+    style.textContent = '.pg-bot-ask{margin-top:14px;display:grid;gap:8px;min-width:0}.pg-bot-ask label{font-size:13px;font-weight:750;line-height:1.45}.pg-bot-ask-row{display:flex;flex-wrap:wrap;gap:8px}.pg-bot-ask input{flex:1 1 150px;min-width:0;max-width:100%;min-height:44px;padding:10px;border:1px solid #9cc5d5;border-radius:9px;background:#10293b;color:#fff;font:inherit}.pg-bot-ask button{min-height:44px;border-radius:9px;border:1px solid #c0ee96;background:#c0ee96;color:#14291f;padding:9px 13px;font:inherit;font-weight:800;cursor:pointer}.pg-bot-ask :is(input,button):focus-visible{outline:3px solid #dcffac;outline-offset:3px}.pg-bot-ask small{font-size:11px;line-height:1.5;color:#d2e6ef}.pg-bot-ask-status{margin:0;min-height:0;line-height:1.5;font-size:13px;overflow-wrap:anywhere;color:#e1f2fa}';
+    document.head.append(style);
+    const form = document.createElement('form');
+    form.className = 'pg-bot-ask';
+    form.autocomplete = 'off';
+    const label = document.createElement('label');
+    label.htmlFor = 'pg-bot-ask-input';
+    label.textContent = 'Pergunte ao PG Bot sobre este jogo';
+    const row = document.createElement('div');
+    row.className = 'pg-bot-ask-row';
+    const field = document.createElement('input');
+    field.id = 'pg-bot-ask-input';
+    field.type = 'search';
+    field.name = 'pergunta';
+    field.maxLength = 240;
+    field.placeholder = 'Ex.: como vencer?';
+    field.setAttribute('enterkeyhint', 'send');
+    const submit = document.createElement('button');
+    submit.type = 'submit';
+    submit.textContent = 'Perguntar';
+    row.append(field, submit);
+    const description = document.createElement('small');
+    description.textContent = 'Respostas prontas do jogo atual, sem IA conectada e sem envio da pergunta.';
+    const status = document.createElement('p');
+    status.className = 'pg-bot-ask-status';
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    form.append(label,row,description,status);
+    panel.append(form);
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      const question = plain(field.value.trim());
+      if (/offline|sem internet|sem rede|sem conexao|desconectad/.test(question)) {
+        status.textContent = 'O jogo pode funcionar offline depois de carregar os arquivos neste aparelho. Na primeira visita ou sem cache disponível, é necessário acessar a internet.';
+        return;
+      }
+      let wanted = '';
+      if (/situac|status|estado|turno|placar|pontos|pontu|record|progresso|minha partida/.test(question)) wanted = 'status';
+      else if (/dica|estrateg|como venc|ganhar|como ganh|melhor jogad|proximo passo/.test(question)) wanted = 'strategy';
+      else if (/teclado|teclas|controles|comandos|como mover|como tocar|mouse|toque|botao/.test(question)) wanted = 'controls';
+      else if (/objetivo|como jog|regras|comec|iniciar|preciso fazer|qual a meta/.test(question)) wanted = 'objective';
+      const find = pattern => topics.find(button => pattern.test(plain(button.textContent)));
+      const selected = wanted === 'status' ? find(/situac|status/) :
+        wanted === 'strategy' ? (find(/estrateg|dica/) || find(/objetivo/)) :
+        wanted === 'controls' ? find(/control/) :
+        wanted === 'objective' ? (find(/objetivo/) || find(/control/)) : null;
+      if (selected) {
+        status.textContent = '';
+        selected.click();
+      } else {
+        status.textContent = 'Posso orientar sobre objetivo, estratégia, controles, situação e uso offline. Escolha uma opção acima ou escreva outra pergunta.';
+      }
+    });
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
+  else init();
+})();
+</script>
+<!-- PG_BOT_ASK_BRIDGE_END -->
+</body>
+</html>

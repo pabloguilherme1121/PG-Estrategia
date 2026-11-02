@@ -1,0 +1,17 @@
+{
+  "name": "Malha de Energia · PG Estratégia",
+  "short_name": "Malha PG",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#092034",
+  "theme_color": "#12334c",
+  "icons": [
+    {
+      "src": "../../../assets/arcade-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

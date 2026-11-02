@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#123047"><meta name="color-scheme" content="dark">
+<meta name="description" content="Controle de Tráfego: jogo de estratégia de semáforos, filas, turnos e prioridade a ambulâncias.">
+<link rel="manifest" href="./manifest.webmanifest"><link rel="stylesheet" href="./style.css">
+<title>Controle de Tráfego | PG Estratégia</title></head><body>
+<a class="skip" href="#main">Pular para o jogo</a>
+<div class="shell">
+<header class="top"><a class="brand" href="../../">PG <strong>ESTRATÉGIA</strong></a><nav aria-label="Sites PG"><a href="../">Jogos originais</a><a href="../../">Missões</a><a href="https://pabloguilherme1121.github.io/PG-Arcade/">PG Arcade</a></nav></header>
+<main id="main">
+<p class="eyebrow">JOGO ORIGINAL · GESTÃO DE FLUXO</p>
+<h1>Controle <em>de Tráfego</em></h1>
+<p class="intro">Você controla os semáforos de um cruzamento. Abra Norte–Sul ou Leste–Oeste a cada turno. Evite congestionamentos e, na operação Resgate, libere as ambulâncias antes do prazo.</p>
+<section class="settings" aria-label="Configurar jogo">
+<label>Operação<select id="mode" aria-label="Operação"><option value="cidade">Cidade · fluxo diário</option><option value="resgate">Resgate · ambulâncias prioritárias</option></select></label>
+<label>Dificuldade<select id="difficulty" aria-label="Dificuldade"><option value="recruta">Recruta</option><option value="tatico">Tático</option><option value="veterano">Veterano</option></select></label>
+<button id="reset" type="button">Nova operação</button>
+</section>
+<div class="layout">
+<section class="arena" aria-labelledby="arena-title">
+<div class="section-head"><div><p class="eyebrow">CENTRAL · 4 VIAS</p><h2 id="arena-title">Painel do cruzamento</h2></div><span id="phase">Em andamento</span></div>
+<div class="metrics" aria-label="Situação do tráfego"><div>Turnos <strong id="turns">0/12</strong></div><div>Liberados <strong id="served">0/16</strong></div><div>Resgates <strong id="emergency">0/2</strong></div><div>Limite da fila <strong id="limit">6</strong></div></div>
+<div id="crossing" class="crossing" role="group" aria-label="Quatro filas de tráfego">
+<div class="lane" data-lane="N"><strong>Norte</strong><span id="lane-N">0 veículos</span></div>
+<div class="lane" data-lane="W"><strong>Oeste</strong><span id="lane-W">0 veículos</span></div>
+<div class="center" id="signal" aria-live="off">◉<small>Semáforo fechado</small></div>
+<div class="lane" data-lane="E"><strong>Leste</strong><span id="lane-E">0 veículos</span></div>
+<div class="lane" data-lane="S"><strong>Sul</strong><span id="lane-S">0 veículos</span></div>
+</div>
+<p class="legend">Os números indicam quantos veículos esperam. O símbolo 🚑 indica uma ambulância na fila. Se uma fila ultrapassar o limite, a operação acaba.</p>
+<div class="commands" role="group" aria-label="Controlar semáforos">
+<button type="button" id="signal-ns" data-axis="NS" class="primary">Abrir Norte–Sul</button>
+<button type="button" id="signal-ew" data-axis="EW" class="primary">Abrir Leste–Oeste</button>
+</div>
+<p id="status" class="status" role="status" aria-live="polite"></p>
+<div class="actions"><button type="button" id="pause">Pausar operação</button><button type="button" id="undo">Desfazer turno</button></div>
+</section>
+<aside class="aside">
+<h2>Estratégia da central</h2>
+<p>A cada abertura, um veículo pode atravessar por cada uma das duas vias liberadas. Os próximos veículos chegam ao mesmo tempo. Planeje os sinais para não acumular filas.</p>
+<p>Na operação <strong>Resgate</strong>, duas ambulâncias chegam durante a partida. Se uma delas ficar sem passagem por tempo demais, você perde mesmo que outras filas estejam livres.</p>
+<p>Três dificuldades modificam a meta de veículos liberados e o limite de congestionamento. Todas as partidas duram até 12 turnos.</p>
+<p id="record" class="record">Sem recordes nesta configuração.</p>
+<details id="pg-bot" class="bot"><summary><img src="../../brand/pg-bot/mascot.webp" alt="" width="36" height="42" loading="lazy"> PG Bot · Ajuda local</summary>
+<p>Respostas prontas, sem conversa com IA nem transmissão de dados.</p>
+<div class="bot-topics" role="group" aria-label="Assuntos do PG Bot"><button data-help="objetivo">Objetivo</button><button data-help="controles">Controles</button><button data-help="situacao">Situação</button></div>
+<p id="bot-answer" role="status" aria-live="polite">Escolha um assunto.</p></details>
+</aside></div></main>
+<footer><a href="../">Jogos originais</a><a href="../../">PG Estratégia</a><a href="https://pabloguilherme1121.github.io/PG-Arcade/">PG Arcade</a><small>Recordes somente no navegador, sem contas ou serviços pagos.</small></footer>
+</div>
+<script type="module" src="./app.js"></script><!-- PG_BOT_ASK_BRIDGE_START -->
+<script>
+// PG Bot: acessibilidade e perguntas locais para os 27 jogos independentes.
+// Este arquivo é incorporado aos respectivos index.html para funcionar offline.
+(() => {
+  const plain = value => String(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const init = () => {
+    const panel = document.getElementById('pg-bot');
+    if (!panel || panel.querySelector('.pg-bot-ask')) return;
+    // Cada sub-jogo usa nomes de data-* diferentes; os três botões nativos são a fonte de verdade.
+    const topics = [...panel.querySelectorAll('button')];
+    if (topics.length < 2) return;
+    const style = document.createElement('style');
+    style.textContent = '.pg-bot-ask{margin-top:14px;display:grid;gap:8px;min-width:0}.pg-bot-ask label{font-size:13px;font-weight:750;line-height:1.45}.pg-bot-ask-row{display:flex;flex-wrap:wrap;gap:8px}.pg-bot-ask input{flex:1 1 150px;min-width:0;max-width:100%;min-height:44px;padding:10px;border:1px solid #9cc5d5;border-radius:9px;background:#10293b;color:#fff;font:inherit}.pg-bot-ask button{min-height:44px;border-radius:9px;border:1px solid #c0ee96;background:#c0ee96;color:#14291f;padding:9px 13px;font:inherit;font-weight:800;cursor:pointer}.pg-bot-ask :is(input,button):focus-visible{outline:3px solid #dcffac;outline-offset:3px}.pg-bot-ask small{font-size:11px;line-height:1.5;color:#d2e6ef}.pg-bot-ask-status{margin:0;min-height:0;line-height:1.5;font-size:13px;overflow-wrap:anywhere;color:#e1f2fa}';
+    document.head.append(style);
+    const form = document.createElement('form');
+    form.className = 'pg-bot-ask';
+    form.autocomplete = 'off';
+    const label = document.createElement('label');
+    label.htmlFor = 'pg-bot-ask-input';
+    label.textContent = 'Pergunte ao PG Bot sobre este jogo';
+    const row = document.createElement('div');
+    row.className = 'pg-bot-ask-row';
+    const field = document.createElement('input');
+    field.id = 'pg-bot-ask-input';
+    field.type = 'search';
+    field.name = 'pergunta';
+    field.maxLength = 240;
+    field.placeholder = 'Ex.: como vencer?';
+    field.setAttribute('enterkeyhint', 'send');
+    const submit = document.createElement('button');
+    submit.type = 'submit';
+    submit.textContent = 'Perguntar';
+    row.append(field, submit);
+    const description = document.createElement('small');
+    description.textContent = 'Respostas prontas do jogo atual, sem IA conectada e sem envio da pergunta.';
+    const status = document.createElement('p');
+    status.className = 'pg-bot-ask-status';
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    form.append(label,row,description,status);
+    panel.append(form);
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      const question = plain(field.value.trim());
+      if (/offline|sem internet|sem rede|sem conexao|desconectad/.test(question)) {
+        status.textContent = 'O jogo pode funcionar offline depois de carregar os arquivos neste aparelho. Na primeira visita ou sem cache disponível, é necessário acessar a internet.';
+        return;
+      }
+      let wanted = '';
+      if (/situac|status|estado|turno|placar|pontos|pontu|record|progresso|minha partida/.test(question)) wanted = 'status';
+      else if (/dica|estrateg|como venc|ganhar|como ganh|melhor jogad|proximo passo/.test(question)) wanted = 'strategy';
+      else if (/teclado|teclas|controles|comandos|como mover|como tocar|mouse|toque|botao/.test(question)) wanted = 'controls';
+      else if (/objetivo|como jog|regras|comec|iniciar|preciso fazer|qual a meta/.test(question)) wanted = 'objective';
+      const find = pattern => topics.find(button => pattern.test(plain(button.textContent)));
+      const selected = wanted === 'status' ? find(/situac|status/) :
+        wanted === 'strategy' ? (find(/estrateg|dica/) || find(/objetivo/)) :
+        wanted === 'controls' ? find(/control/) :
+        wanted === 'objective' ? (find(/objetivo/) || find(/control/)) : null;
+      if (selected) {
+        status.textContent = '';
+        selected.click();
+      } else {
+        status.textContent = 'Posso orientar sobre objetivo, estratégia, controles, situação e uso offline. Escolha uma opção acima ou escreva outra pergunta.';
+      }
+    });
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
+  else init();
+})();
+</script>
+<!-- PG_BOT_ASK_BRIDGE_END -->
+</body></html>

@@ -1,0 +1,107 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#102a3d"><meta name="color-scheme" content="dark">
+<meta name="description" content="Travessia do Vale: leve cargas e animais em segurança para a outra margem.">
+<title>Travessia do Vale | PG Estratégia</title>
+<link rel="stylesheet" href="./style.css"><link rel="manifest" href="./manifest.webmanifest"></head><body>
+<a class="skip" href="#main">Pular para o jogo</a><div class="shell">
+<header class="masthead"><a class="brand" href="../">PG <strong>ESTRATÉGIA</strong></a>
+<nav aria-label="Navegação entre projetos"><a href="../">Jogos originais</a><a href="../../">Missões</a><a href="https://pabloguilherme1121.github.io/PG-Arcade/">PG Arcade</a></nav></header>
+<main id="main"><section class="intro"><p class="eyebrow">MOTOR INDEPENDENTE 29 · LOGÍSTICA DE TRAVESSIA</p>
+<h1>Travessia <em>do Vale</em></h1><p>Leve toda a expedição até a margem oposta. Não deixe o lobo com a cabra nem a cabra com o repolho sem o piloto por perto. Escolha passageiros e planeje cada passagem.</p></section>
+<div class="layout"><section class="panel arena" aria-label="Partida Travessia do Vale">
+<div class="panel-head"><h2>Ponte de comando</h2><strong id="phase">Em andamento</strong></div>
+<div class="stats"><div><span>Travessias</span><strong id="moves">0</strong></div><div><span>Prazo</span><strong id="limit">35</strong></div>
+<div><span>Transportados</span><strong id="delivered">0/3</strong></div><div><span>Recorde</span><strong id="record">Nenhum</strong></div></div>
+<div class="banks">
+<div class="bank"><h3>Margem inicial</h3><div id="left" class="passengers"></div></div>
+<div class="river" aria-label="Rio e balsa"><span aria-hidden="true">≈ ≈ ≈</span><strong id="boat">Balsa na margem inicial</strong><span aria-hidden="true">≈ ≈ ≈</span></div>
+<div class="bank"><h3>Margem final</h3><div id="right" class="passengers"></div></div>
+</div><p class="selection-note">Selecione até <strong id="capacity">1</strong> passageiro(s) da margem da balsa. Toque em um passageiro novamente para removê-lo da seleção.</p>
+<div id="selection" class="selection" aria-live="polite"></div>
+</section><aside class="panel controls"><div class="selectors"><label>Modo
+<select id="mode"><option value="classico">Balsa pequena (1 passageiro)</option><option value="expedicao">Expedição (2 passageiros)</option></select></label>
+<label>Dificuldade<select id="difficulty"><option value="recruta">Recruta (3 objetos)</option><option value="tatico">Tático (4 objetos)</option><option value="veterano">Veterano (5 objetos)</option></select></label></div>
+<p id="status-text" role="status" aria-live="polite">Pronto para jogar.</p>
+<div class="actions"><button id="cross" type="button">Atravessar com seleção</button>
+<button id="pause" type="button">Pausar</button><button id="undo" type="button">Desfazer</button>
+<button id="hint" type="button">Pedir dica</button><button id="reset" type="button">Reiniciar</button></div>
+<p id="hint-text" aria-live="polite"></p>
+<details id="pg-bot"><summary>PG Bot · Ajuda local</summary><div class="bot-actions"><button type="button" data-bot="situation">Situação</button>
+<button type="button" data-bot="strategy">Estratégia</button><button type="button" data-bot="controls">Controles</button></div>
+<p id="bot-answer" aria-live="polite">Escolha uma opção.</p></details></aside></div>
+<section class="rules"><h2>Como vencer</h2><p>Transporte todos para a margem final dentro do prazo. A balsa comporta um ou dois passageiros conforme o modo. O piloto pode voltar sozinho, mas nunca pode deixar lobo e cabra, ou cabra e repolho, juntos na margem que ficou sem supervisão. Cada travessia gasta um turno.</p></section></main>
+<footer><a href="../">Jogos independentes</a><a href="https://pabloguilherme1121.github.io/PG-Arcade/">PG Arcade</a></footer></div>
+<script type="module" src="./app.js"></script><!-- PG_BOT_ASK_BRIDGE_START -->
+<script>
+// PG Bot: acessibilidade e perguntas locais para os 27 jogos independentes.
+// Este arquivo é incorporado aos respectivos index.html para funcionar offline.
+(() => {
+  const plain = value => String(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const init = () => {
+    const panel = document.getElementById('pg-bot');
+    if (!panel || panel.querySelector('.pg-bot-ask')) return;
+    // Cada sub-jogo usa nomes de data-* diferentes; os três botões nativos são a fonte de verdade.
+    const topics = [...panel.querySelectorAll('button')];
+    if (topics.length < 2) return;
+    const style = document.createElement('style');
+    style.textContent = '.pg-bot-ask{margin-top:14px;display:grid;gap:8px;min-width:0}.pg-bot-ask label{font-size:13px;font-weight:750;line-height:1.45}.pg-bot-ask-row{display:flex;flex-wrap:wrap;gap:8px}.pg-bot-ask input{flex:1 1 150px;min-width:0;max-width:100%;min-height:44px;padding:10px;border:1px solid #9cc5d5;border-radius:9px;background:#10293b;color:#fff;font:inherit}.pg-bot-ask button{min-height:44px;border-radius:9px;border:1px solid #c0ee96;background:#c0ee96;color:#14291f;padding:9px 13px;font:inherit;font-weight:800;cursor:pointer}.pg-bot-ask :is(input,button):focus-visible{outline:3px solid #dcffac;outline-offset:3px}.pg-bot-ask small{font-size:11px;line-height:1.5;color:#d2e6ef}.pg-bot-ask-status{margin:0;min-height:0;line-height:1.5;font-size:13px;overflow-wrap:anywhere;color:#e1f2fa}';
+    document.head.append(style);
+    const form = document.createElement('form');
+    form.className = 'pg-bot-ask';
+    form.autocomplete = 'off';
+    const label = document.createElement('label');
+    label.htmlFor = 'pg-bot-ask-input';
+    label.textContent = 'Pergunte ao PG Bot sobre este jogo';
+    const row = document.createElement('div');
+    row.className = 'pg-bot-ask-row';
+    const field = document.createElement('input');
+    field.id = 'pg-bot-ask-input';
+    field.type = 'search';
+    field.name = 'pergunta';
+    field.maxLength = 240;
+    field.placeholder = 'Ex.: como vencer?';
+    field.setAttribute('enterkeyhint', 'send');
+    const submit = document.createElement('button');
+    submit.type = 'submit';
+    submit.textContent = 'Perguntar';
+    row.append(field, submit);
+    const description = document.createElement('small');
+    description.textContent = 'Respostas prontas do jogo atual, sem IA conectada e sem envio da pergunta.';
+    const status = document.createElement('p');
+    status.className = 'pg-bot-ask-status';
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    form.append(label,row,description,status);
+    panel.append(form);
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      const question = plain(field.value.trim());
+      if (/offline|sem internet|sem rede|sem conexao|desconectad/.test(question)) {
+        status.textContent = 'O jogo pode funcionar offline depois de carregar os arquivos neste aparelho. Na primeira visita ou sem cache disponível, é necessário acessar a internet.';
+        return;
+      }
+      let wanted = '';
+      if (/situac|status|estado|turno|placar|pontos|pontu|record|progresso|minha partida/.test(question)) wanted = 'status';
+      else if (/dica|estrateg|como venc|ganhar|como ganh|melhor jogad|proximo passo/.test(question)) wanted = 'strategy';
+      else if (/teclado|teclas|controles|comandos|como mover|como tocar|mouse|toque|botao/.test(question)) wanted = 'controls';
+      else if (/objetivo|como jog|regras|comec|iniciar|preciso fazer|qual a meta/.test(question)) wanted = 'objective';
+      const find = pattern => topics.find(button => pattern.test(plain(button.textContent)));
+      const selected = wanted === 'status' ? find(/situac|status/) :
+        wanted === 'strategy' ? (find(/estrateg|dica/) || find(/objetivo/)) :
+        wanted === 'controls' ? find(/control/) :
+        wanted === 'objective' ? (find(/objetivo/) || find(/control/)) : null;
+      if (selected) {
+        status.textContent = '';
+        selected.click();
+      } else {
+        status.textContent = 'Posso orientar sobre objetivo, estratégia, controles, situação e uso offline. Escolha uma opção acima ou escreva outra pergunta.';
+      }
+    });
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
+  else init();
+})();
+</script>
+<!-- PG_BOT_ASK_BRIDGE_END -->
+</body></html>
