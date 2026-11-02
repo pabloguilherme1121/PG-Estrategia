@@ -9,9 +9,9 @@ test('navegação do Estratégia abre o PG Bot no ambiente correto',()=>{
  const main=readFileSync(join('dist','index.html'),'utf8');
  assert.ok(main.includes(portal), 'faltou parâmetro da Estratégia na central');
 });
-test('27 jogos independentes oferecem link contextual para a central, mantendo bot local',()=>{
+test('28 jogos independentes oferecem link contextual para a central, mantendo bot local',()=>{
  const slugs=readdirSync(source,{withFileTypes:true}).filter(x=>x.isDirectory()&&existsSync(join(source,x.name,'index.html'))).map(x=>x.name);
- assert.equal(slugs.length,27);
+ assert.equal(slugs.length,28);
  for(const slug of slugs){
   const html=readFileSync(join(site,slug,'index.html'),'utf8');
   assert.ok(html.includes('id="pg-bot"'),slug+' perdeu ajuda local');

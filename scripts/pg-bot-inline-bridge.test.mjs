@@ -9,8 +9,8 @@ const source=readFileSync(join('scripts','pg-bot-inline-bridge.js'),'utf8').repl
 const ids=readdirSync(root,{withFileTypes:true})
   .filter(item=>item.isDirectory()&&existsSync(join(root,item.name,'index.html')))
   .map(item=>item.name);
-test('todos os 27 jogos com arena recebem o mesmo PG Bot offline, exatamente uma vez',()=>{
- assert.equal(ids.length,27);
+test('todos os 28 jogos com arena recebem o mesmo PG Bot offline, exatamente uma vez',()=>{
+ assert.equal(ids.length,28);
  for(const id of ids){
   const html=readFileSync(join(root,id,'index.html'),'utf8').replace(/\r\n/g,'\n');
   assert.ok(html.includes('id="pg-bot"'),id);

@@ -27,7 +27,7 @@ function visit(folder){
     if(depth===0)output=output.replaceAll('href="../"',`href="${ARCADE}"`);
     if(rel==='independentes/index.html')output=output.replaceAll('href="../../"',`href="${ARCADE}"`);
     if(depth>=2)output=output.replaceAll('href="../../../"',`href="${ARCADE}"`);
-    // Os 27 jogos preservam o PG Bot local e ganham acesso à central
+    // Os jogos em arenas próprias preservam o PG Bot local e ganham acesso à central
     // com o ID correto, sem transferir perguntas, pontos ou histórico.
     if(/^independentes\/[a-z0-9-]+\/index\.html$/.test(rel)){
       const slug=rel.split('/')[1];
