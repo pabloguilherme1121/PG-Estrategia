@@ -6,6 +6,10 @@ const ARCADE='https://pabloguilherme1121.github.io/PG-Arcade/';
 const BOT='https://pabloguilherme1121.github.io/PG-Bot/?projeto=estrategia';
 rmSync(OUTPUT,{recursive:true,force:true});
 cpSync(SOURCE,OUTPUT,{recursive:true});
+// Uma implementação compartilhada no repositório; cada arena participante recebe cópia local no build para funcionar offline.
+for(const gameId of ['gravidade-cristais']){
+ cpSync(join(SOURCE,'independentes','telemetry-adapter.mjs'),join(OUTPUT,'independentes',gameId,'telemetry-adapter.mjs'));
+}
 mkdirSync(join(OUTPUT,'brand','pg-bot'),{recursive:true});
 cpSync('public/brand/pg-bot/mascot.webp',join(OUTPUT,'brand','pg-bot','mascot.webp'));
 let changed=0;

@@ -1,4 +1,5 @@
 import {createGravity,tiltGravity,undoGravity,pauseGravity,hintGravity,GRAVITY_DIRS} from "./engine.mjs";
+import {createTelemetryAdapter} from "./telemetry-adapter.mjs";
 const $=id=>document.getElementById(id),PREF="pg-gravidade-config-v1",SAVE="pg-gravidade-recordes-v1";
 const names={up:"cima",right:"direita",down:"baixo",left:"esquerda"};
 const read=key=>{try{return JSON.parse(localStorage.getItem(key)||"null");}catch{return null;}};
@@ -11,6 +12,17 @@ if(["recruta","tatico","veterano"].includes(pref?.difficulty))$("difficulty").va
 const suppliedSeed=Number(new URLSearchParams(location.search).get("seed")??0);
 let seed=Number.isSafeInteger(suppliedSeed)&&suppliedSeed>=0&&suppliedSeed<=99999999?suppliedSeed:0;
 let game;
+const telemetry=createTelemetryAdapter({
+ gameId:'gravidade-cristais',
+ getSnapshot:()=>({phase:game?.paused?'paused':game?.phase==='won'?'victory':game?.phase==='lost'?'defeat':'playing',moves:game?.moves??0,turn:null,score:game?.phase==='won'?game.score:null,resources:null})
+});
+$('live-share').addEventListener('change',()=>{
+ if($('live-share').checked){
+  if(!telemetry.enable()){$('live-share').checked=false;$('live-share-status').textContent='Comunicação entre abas indisponível neste navegador.';return;}
+  $('live-share-status').textContent='Compartilhando somente jogadas, fase e pontuação. Desative quando quiser.';
+ }else{telemetry.disable();$('live-share-status').textContent='Compartilhamento desativado.'}
+});
+window.addEventListener('pagehide',()=>telemetry.disable());
 const key=p=>p.x+":"+p.y;
 const recordKey=()=>game.mode+":"+game.difficulty;
 function saveRecord(){
@@ -53,6 +65,7 @@ function render(){
  $("hint").disabled=game.phase!=="playing"||game.paused;
  document.querySelectorAll("[data-dir]").forEach(btn=>btn.disabled=game.phase!=="playing"||game.paused);
  drawBoard();
+ telemetry.send();
 }
 function restart(next=false){
  if(next)seed=(seed+1)%100000000;
