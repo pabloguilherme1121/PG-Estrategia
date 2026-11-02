@@ -20,7 +20,7 @@ h1{font-size:clamp(30px,6vw,56px);line-height:1.07;margin:9px 0}h1 em{color:#9ce
 .ship[data-done="true"]{background:#1c4a42;border-color:#6db7a1}.ship[data-done="true"] strong::after{content:" ✓";color:#b3ffcd}
 button,select{font:inherit;color:#fff;border-radius:9px;min-height:44px;max-width:100%}
 button{cursor:pointer;background:#216f82;border:1px solid #84c8d4;padding:9px 13px;touch-action:manipulation;font-weight:750}
-button:hover:not(:disabled){background:#328ea0}button:disabled{opacity:.56;cursor:not-allowed}
+button:hover:not(:disabled){background:#1d6573}button:disabled{opacity:.56;cursor:not-allowed}
 button:focus-visible,a:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #d9ff9b;outline-offset:3px}
 .ship-actions{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}.ship-actions button{min-width:72px;padding:9px 8px;font-size:12px}.ship-status{font-size:12px;font-weight:700;color:#b2f4d3}.berths{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:12px 0}.berth{border:1px solid #73adc0;background:#0b2b3e;border-radius:10px;padding:11px;min-width:0}.berth strong,.berth span{display:block;overflow-wrap:anywhere}.berth strong{font-size:13px;color:#b9f8e1}.berth span{margin-top:5px;font-size:12px}.berth[data-busy="true"]{border-color:#f0be74;background:#3b3b32}.selectors{display:grid;gap:14px;margin-top:16px}.selectors label{font-size:13px;display:grid;gap:7px}
 select{width:100%;padding:9px;border:1px solid #7bb1c6;background:#0a2637}
