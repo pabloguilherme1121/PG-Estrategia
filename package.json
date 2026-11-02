@@ -7,7 +7,9 @@
     "build": "node scripts/build.mjs",
     "test": "npm run build && node scripts/run-tests.mjs",
     "preview": "node scripts/serve.mjs",
-    "test:e2e": "playwright test --config=playwright.config.mjs"
+    "test:e2e": "playwright test --config=playwright.config.mjs",
+    "scenarios:check": "node scripts/scenario-batch.mjs --check",
+    "scenarios:generate": "node scripts/scenario-batch.mjs --write"
   },
   "engines": {
     "node": ">=22"

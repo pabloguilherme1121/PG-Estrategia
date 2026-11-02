@@ -1,0 +1,18 @@
+{
+  "id": "hex-conquest-048",
+  "title": "Cerco de Vanguarda 48",
+  "category": "estrategia",
+  "kind": "scenario",
+  "engine": "hex-conquest",
+  "objective": "Dominar o centro e conquistar a base adversária antes do turno 18.",
+  "controls": {
+    "touch": "Toque primeiro numa posição aliada e depois num hexágono adjacente. Use os controles de reforço e encerramento do turno.",
+    "keyboard": "Navegue pelo tabuleiro com Tab e setas; use Enter ou Espaço para selecionar e confirme a ação nos controles."
+  },
+  "strategyPlan": [
+    "Capture as posições neutras adjacentes para obter suprimentos por turno.",
+    "Observe a defesa do centro 0,0 antes de atacar e preserve uma guarnição na origem.",
+    "Alcance a base adversária 0,-2 antes do turno 18."
+  ],
+  "version": "1.0.0"
+}
