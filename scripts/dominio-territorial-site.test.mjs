@@ -1,0 +1,39 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+const path='public/estrategia/independentes/dominio-territorial/';
+const read=file=>readFileSync(path+file,'utf8');
+test('manifesto do PG Bot descreve controles e plano verificáveis',()=>{
+ const meta=JSON.parse(read('game.meta.json'));
+ assert.equal(meta.id,'dominio-territorial');
+ assert.equal(meta.engine,'hex-conquest');
+ assert.equal(meta.category,'estrategia');
+ assert.match(meta.version,/^\d+\.\d+\.\d+$/);
+ assert.ok(meta.objective.length>=20);
+ assert.ok(meta.controls.touch.length>=20);
+ assert.ok(meta.controls.keyboard.length>=20);
+ assert.equal(meta.strategyPlan.length,3);
+ assert.ok(meta.strategyPlan.every(step=>step.trim().length>=20));
+ assert.match(read('index.html'),/data-bot="estrategia"/);
+});
+test('service worker isola arquivos, escopo e cache por jogo',()=>{
+ const sw=read('sw.js');
+ assert.match(sw,/pg-estrategia-dominio-territorial-v1/);
+ assert.match(sw,/url\.origin!==self\.location\.origin/);
+ assert.match(sw,/url\.pathname\.startsWith\(ROOT\.pathname\)/);
+ assert.match(sw,/request\.method!=='GET'/);
+ assert.match(sw,/\.\/engine\.mjs/);
+ assert.doesNotMatch(sw,/PG-Arcade|PG-Bot\/|localStorage/);
+});
+test('tabuleiro é SVG discreto e preserva zoom, navegação externa e acessibilidade',()=>{
+ const html=read('index.html'),app=read('app.js'),css=read('style.css');
+ assert.match(html,/viewport-fit=cover/);
+ assert.doesNotMatch(html,/user-scalable=no|maximum-scale=1/);
+ assert.match(html,/role="status" aria-live="polite"/);
+ assert.match(css,/\.hex-grid-container svg\{[^}]*touch-action:none/);
+ assert.match(css,/min-height:48px/);
+ assert.doesNotMatch(app,/requestAnimationFrame|setInterval|setTimeout|Math\.random/);
+ assert.match(app,/addEventListener\('keydown'/);
+ assert.match(app,/addEventListener\('click'/);
+ assert.match(html,/PG-Bot\/\?projeto=estrategia/);
+});
