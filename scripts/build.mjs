@@ -3,7 +3,7 @@ import {join,dirname,relative,sep} from 'node:path';
 
 const SOURCE='public/estrategia', OUTPUT='dist';
 const ARCADE='https://pabloguilherme1121.github.io/PG-Arcade/';
-const BOT='https://pabloguilherme1121.github.io/PG-Bot/';
+const BOT='https://pabloguilherme1121.github.io/PG-Bot/?projeto=estrategia';
 rmSync(OUTPUT,{recursive:true,force:true});
 cpSync(SOURCE,OUTPUT,{recursive:true});
 mkdirSync(join(OUTPUT,'brand','pg-bot'),{recursive:true});
@@ -27,6 +27,15 @@ function visit(folder){
     if(depth===0)output=output.replaceAll('href="../"',`href="${ARCADE}"`);
     if(rel==='independentes/index.html')output=output.replaceAll('href="../../"',`href="${ARCADE}"`);
     if(depth>=2)output=output.replaceAll('href="../../../"',`href="${ARCADE}"`);
+    // Os 27 jogos preservam o PG Bot local e ganham acesso à central
+    // com o ID correto, sem transferir perguntas, pontos ou histórico.
+    if(/^independentes\/[a-z0-9-]+\/index\.html$/.test(rel)){
+      const slug=rel.split('/')[1];
+      const destination=BOT+'&amp;jogo='+encodeURIComponent(slug);
+      if(!/<footer\b/i.test(output))throw Error('Rodapé ausente: '+rel);
+      output=output.replace(/(<footer\b[^>]*>)/i,
+        `$1<a data-pg-bot-site="independent" href="${destination}" target="_blank" rel="noopener noreferrer">PG Bot completo · ajuda deste jogo ↗</a>`);
+    }
     if(rel==='index.html'){
       const botNav=`<a href="${BOT}">PG Bot</a>`;
       output=output.replace('<a class="portfolio-link"',botNav+'<a class="portfolio-link"');
