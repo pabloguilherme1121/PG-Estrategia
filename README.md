@@ -10,6 +10,12 @@ Site próprio do PG Estratégia, extraído sem alterar ou apagar o projeto PG Ar
 - PWA com cache e armazenamento de progresso no próprio navegador.
 - Biblioteca de 47 jogos históricos do PG Arcade, acessados por links oficiais. Esses 47 jogos continuam hospedados no Arcade.
 
+## Integração com o PG Bot
+
+O painel de ajuda da campanha oferece **Abrir PG Bot completo**. Quando uma missão está aberta, esse link informa apenas o ID da missão, por exemplo `?projeto=estrategia&jogo=est-150`. Não transmite progresso, respostas digitadas nem dados pessoais. Ao fechar a missão, o link volta à página inicial do bot.
+
+Os jogos permanecem funcionando sem depender do site externo de ajuda, inclusive no modo offline após os arquivos serem armazenados.
+
 ## Organização
 
 - `public/estrategia/`: fonte da campanha e dos jogos, mantida com sua hierarquia original para preservar os motores e os testes existentes.
