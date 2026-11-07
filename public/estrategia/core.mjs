@@ -88,4 +88,44 @@ export function play(s,action){if(s.status!=='playing')return fail(s,'Esta parti
   return next;
 }
 export function progressValue(s){switch(s.family){case 'territorio':return [count(s.cells,1),s.target];case 'rotas':return [s.path.length-1,8];case 'economia':return [s.influence,s.target];case 'defesa':return [s.turn,s.waves.length];case 'logistica':return [s.carried.length,s.crates.length];case 'cidade':return [Math.min(s.energy,s.water,s.trust),s.target];default:return [0,1];}}
-export function validateSession(s){if(!s||typeof s!=='object'||!getMission(s.id)||s.family!==getMission(s.id).family||!['playing','won','lost'].includes(s.status)||!Number.isInteger(s.turn)||s.turn<0||s.turn>60||!Array.isArray(s.history)||s.history.length>30)return false;try{return JSON.stringify(s).length<24000;}catch{return false;}}
+const isResource = n => Number.isSafeInteger(n) && n >= 0 && n <= 100000;
+const isCell = n => Number.isSafeInteger(n) && n >= 0 && n < SIZE * SIZE;
+const isBoard = (value,size,predicate) => Array.isArray(value) && value.length === size && value.every(predicate);
+
+// Sessões reconstruídas são dados externos: verificar a forma ANTES de chamá-las no motor.
+function validFamilyState(s){
+  if(s.family==='territorio')
+    return isBoard(s.cells,25,n=>[-1,0,1,2].includes(n)) && isResource(s.target) && isResource(s.enemyBias);
+  if(s.family==='rotas')
+    return isBoard(s.blocked,25,b=>typeof b==='boolean') && Array.isArray(s.path) &&
+      s.path.length>=1 && s.path.length<=25 && s.path[0]===0 && s.path.every(isCell) && s.goal===24;
+  if(s.family==='economia')
+    return [s.credits,s.food,s.ore,s.influence,s.target].every(isResource);
+  if(s.family==='defesa')
+    return isBoard(s.towers,3,n=>Number.isSafeInteger(n)&&n>=0&&n<=4) &&
+      Array.isArray(s.waves) && s.waves.length>=1 && s.waves.length<=12 &&
+      s.waves.every(w=>w&&Number.isInteger(w.lane)&&w.lane>=0&&w.lane<3&&
+        Number.isInteger(w.power)&&w.power>=1&&w.power<=5) &&
+      Number.isSafeInteger(s.hp) && s.hp>=-100 && isResource(s.credits);
+  if(s.family==='logistica')
+    return isCell(s.position) && isBoard(s.rocks,25,b=>typeof b==='boolean') &&
+      Array.isArray(s.crates) && s.crates.length===2 && s.crates.every(isCell) &&
+      Array.isArray(s.pumps) && s.pumps.length===2 && s.pumps.every(isCell) &&
+      Array.isArray(s.carried) && s.carried.length<=s.crates.length &&
+      s.carried.every(n=>isCell(n)&&s.crates.includes(n)) && isResource(s.fuel);
+  if(s.family==='cidade')
+    return [s.energy,s.water,s.trust,s.target].every(isResource);
+  return false;
+}
+export function validateSession(s){
+  try {
+    const mission=getMission(s?.id);
+    if(!mission||s.family!==mission.family||!['playing','won','lost'].includes(s.status)||
+      !Number.isInteger(s.turn)||s.turn<0||s.turn>60||
+      !Number.isInteger(s.limit)||s.limit<1||s.limit>60||
+      !Array.isArray(s.history)||s.history.length>30||!validFamilyState(s))return false;
+    if(!s.history.every(h=>h&&typeof h==='object'&&h.id===s.id&&h.family===s.family&&
+      Number.isInteger(h.turn)&&h.turn>=0&&h.turn<=s.turn&&validFamilyState(h)))return false;
+    return JSON.stringify(s).length<24000;
+  } catch { return false; }
+}
