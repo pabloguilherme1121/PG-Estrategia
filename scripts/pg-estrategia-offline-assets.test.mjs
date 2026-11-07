@@ -24,7 +24,7 @@ test('cada service worker independente aponta para arquivos reais no build publi
   for(const asset of assets){
    assert.ok(asset.startsWith('./'),'pré-cache precisa ser relativo ao escopo: '+worker+' '+asset);
    const target=resolve(dirname(worker),asset);
-   assert.ok(target.startsWith(output+sep),'pré-cache fora do build: '+worker+' '+asset);
+   assert.ok(target===output||target.startsWith(output+sep),'pré-cache fora do build: '+worker+' '+asset);
    const file=asset==='./'?join(target,'index.html'):target;
    assert.ok(existsSync(file)&&statSync(file).isFile(),'pré-cache aponta para arquivo ausente: '+worker+' '+asset);
   }
