@@ -17,7 +17,7 @@ test('cada service worker independente aponta para arquivos reais no build publi
  assert.ok(workers.length>=30,'esperados service workers do catálogo, independentes e hub');
  for(const worker of workers){
   const source=readFileSync(worker,'utf8');
-  const declaration=source.match(/(?:const|let)\\s+(?:FILES|ASSETS)\\s*=\\s*\\[([\\s\\S]*?)\\]/);
+  const declaration=source.match(/(?:const|let)\s+(?:FILES|ASSETS)\s*=\s*\[([\s\S]*?)\]/);
   assert.ok(declaration,'lista de pré-cache não encontrada: '+worker);
   const assets=[...declaration[1].matchAll(/["']([^"']+)["']/g)].map(x=>x[1]);
   assert.ok(assets.length>0,'pré-cache vazio: '+worker);
