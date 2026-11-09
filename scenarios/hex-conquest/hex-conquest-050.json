@@ -1,0 +1,153 @@
+{
+  "id": "hex-conquest-050",
+  "title": "Ataque Assimétrico 50",
+  "kind": "scenario",
+  "engine": "hex-conquest",
+  "rules": {
+    "maxTurns": 22,
+    "supplyPerOwnedHex": 1,
+    "baseTroopCost": 2
+  },
+  "initialPlayerSupplies": 6,
+  "initialEnemySupplies": 6,
+  "initialCells": [
+    {
+      "q": -2,
+      "r": 0,
+      "owner": "neutral",
+      "troops": 1,
+      "defenseBonus": 1
+    },
+    {
+      "q": -2,
+      "r": 1,
+      "owner": "neutral",
+      "troops": 1,
+      "defenseBonus": 1
+    },
+    {
+      "q": -2,
+      "r": 2,
+      "owner": "neutral",
+      "troops": 1,
+      "defenseBonus": 1
+    },
+    {
+      "q": -1,
+      "r": -1,
+      "owner": "neutral",
+      "troops": 1,
+      "defenseBonus": 1
+    },
+    {
+      "q": -1,
+      "r": 0,
+      "owner": "neutral",
+      "troops": 2,
+      "defenseBonus": 1
+    },
+    {
+      "q": -1,
+      "r": 1,
+      "owner": "neutral",
+      "troops": 1,
+      "defenseBonus": 1
+    },
+    {
+      "q": -1,
+      "r": 2,
+      "owner": "neutral",
+      "troops": 1,
+      "defenseBonus": 1
+    },
+    {
+      "q": 0,
+      "r": -2,
+      "owner": "enemy",
+      "troops": 5,
+      "defenseBonus": 1.2
+    },
+    {
+      "q": 0,
+      "r": -1,
+      "owner": "neutral",
+      "troops": 1,
+      "defenseBonus": 1
+    },
+    {
+      "q": 0,
+      "r": 0,
+      "owner": "neutral",
+      "troops": 4,
+      "defenseBonus": 1
+    },
+    {
+      "q": 0,
+      "r": 1,
+      "owner": "neutral",
+      "troops": 1,
+      "defenseBonus": 1
+    },
+    {
+      "q": 0,
+      "r": 2,
+      "owner": "player",
+      "troops": 5,
+      "defenseBonus": 1.2
+    },
+    {
+      "q": 1,
+      "r": -2,
+      "owner": "neutral",
+      "troops": 1,
+      "defenseBonus": 1
+    },
+    {
+      "q": 1,
+      "r": -1,
+      "owner": "neutral",
+      "troops": 1,
+      "defenseBonus": 1
+    },
+    {
+      "q": 1,
+      "r": 0,
+      "owner": "neutral",
+      "troops": 1,
+      "defenseBonus": 1
+    },
+    {
+      "q": 1,
+      "r": 1,
+      "owner": "neutral",
+      "troops": 1,
+      "defenseBonus": 1
+    },
+    {
+      "q": 2,
+      "r": -2,
+      "owner": "neutral",
+      "troops": 1,
+      "defenseBonus": 1
+    },
+    {
+      "q": 2,
+      "r": -1,
+      "owner": "neutral",
+      "troops": 1,
+      "defenseBonus": 1
+    },
+    {
+      "q": 2,
+      "r": 0,
+      "owner": "neutral",
+      "troops": 1,
+      "defenseBonus": 1
+    }
+  ],
+  "objective": {
+    "targetHex": "0,-2",
+    "centralHex": "0,0",
+    "text": "Dominar o centro e conquistar a base adversária antes do turno 22."
+  }
+}

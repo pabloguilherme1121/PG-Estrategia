@@ -1,0 +1,69 @@
+{
+  "id": "hex-conquest-039",
+  "title": "Cerco de Vanguarda 39",
+  "kind": "scenario",
+  "engine": "hex-conquest",
+  "rules": {
+    "maxTurns": 18,
+    "supplyPerOwnedHex": 2,
+    "baseTroopCost": 3
+  },
+  "initialPlayerSupplies": 9,
+  "initialEnemySupplies": 9,
+  "initialCells": [
+    {
+      "q": -1,
+      "r": 0,
+      "owner": "neutral",
+      "troops": 1,
+      "defenseBonus": 1
+    },
+    {
+      "q": -1,
+      "r": 1,
+      "owner": "neutral",
+      "troops": 1,
+      "defenseBonus": 1
+    },
+    {
+      "q": 0,
+      "r": -1,
+      "owner": "enemy",
+      "troops": 3,
+      "defenseBonus": 1.2
+    },
+    {
+      "q": 0,
+      "r": 0,
+      "owner": "neutral",
+      "troops": 2,
+      "defenseBonus": 1.2
+    },
+    {
+      "q": 0,
+      "r": 1,
+      "owner": "player",
+      "troops": 4,
+      "defenseBonus": 1.2
+    },
+    {
+      "q": 1,
+      "r": -1,
+      "owner": "neutral",
+      "troops": 1,
+      "defenseBonus": 1
+    },
+    {
+      "q": 1,
+      "r": 0,
+      "owner": "neutral",
+      "troops": 1,
+      "defenseBonus": 1
+    }
+  ],
+  "objective": {
+    "targetHex": "0,-1",
+    "centralHex": "0,0",
+    "text": "Dominar o centro e conquistar a base adversária antes do turno 18."
+  }
+}
